@@ -1,0 +1,7 @@
+D:\payment-switch\payment-switch\switch-persistence\src\main\java\com\paymentswitch\persistence\config\DataSourceConfig.java
+D:\payment-switch\payment-switch\switch-persistence\src\main\java\com\paymentswitch\persistence\config\FlywayMigrator.java
+D:\payment-switch\payment-switch\switch-persistence\src\main\java\com\paymentswitch\persistence\config\MyBatisConfig.java
+D:\payment-switch\payment-switch\switch-persistence\src\main\java\com\paymentswitch\persistence\entity\TransactionRecord.java
+D:\payment-switch\payment-switch\switch-persistence\src\main\java\com\paymentswitch\persistence\mapper\BinTableMapper.java
+D:\payment-switch\payment-switch\switch-persistence\src\main\java\com\paymentswitch\persistence\mapper\TransactionMapper.java
+D:\payment-switch\payment-switch\switch-persistence\src\main\java\com\paymentswitch\persistence\repository\TransactionRepository.java

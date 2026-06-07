@@ -1,0 +1,5 @@
+com\paymentswitch\routing\RoutingService.class
+com\paymentswitch\routing\BinTableRepository.class
+com\paymentswitch\routing\impl\BinRoutingService.class
+com\paymentswitch\routing\impl\InMemoryBinTableRepository.class
+com\paymentswitch\routing\BinTableEntry.class

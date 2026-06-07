@@ -1,0 +1,5 @@
+com\paymentswitch\issuer\handler\IssuerChannelInitializer.class
+com\paymentswitch\issuer\handler\IssuerResponseHandler.class
+com\paymentswitch\issuer\IssuerEndpoint.class
+com\paymentswitch\issuer\IssuerConnection.class
+com\paymentswitch\issuer\IssuerClientPool.class

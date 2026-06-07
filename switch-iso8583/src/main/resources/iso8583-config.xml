@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Neapay ISO8583-93 – extended field definitions including secondary bitmap (DE 65-128).
+    Bitmap: 16-byte ASCII hex (useBinaryBitmap=false).
+-->
+<j8583-config >
+
+    <!-- Shared financial / authorization field set (primary + secondary bitmap) -->
+    <!-- 0100 Authorization Request -->
+    <parse type="0100">
+        <field num="2"  type="LLVAR"   />
+        <field num="3"  type="NUMERIC" length="6"  />
+        <field num="4"  type="NUMERIC" length="12" />
+        <field num="7"  type="DATE10"  />
+        <field num="8"  type="NUMERIC" length="8"  />
+        <field num="10" type="NUMERIC" length="8"  />
+        <field num="11" type="NUMERIC" length="6"  />
+        <field num="12" type="TIME"    />
+        <field num="13" type="DATE4"   />
+        <field num="14" type="DATE_EXP"/>
+        <field num="16" type="NUMERIC" length="4"  />
+        <field num="17" type="NUMERIC" length="4"  />
+        <field num="18" type="NUMERIC" length="4"  />
+        <field num="22" type="NUMERIC" length="3"  />
+        <field num="23" type="NUMERIC" length="3"  />
+        <field num="24" type="NUMERIC" length="3"  />
+        <field num="25" type="NUMERIC" length="2"  />
+        <field num="26" type="NUMERIC" length="2"  />
+        <field num="27" type="NUMERIC" length="1"  />
+        <field num="28" type="ALPHA"   length="9"  />
+        <field num="30" type="NUMERIC" length="8"  />
+        <field num="32" type="LLVAR"   />
+        <field num="33" type="LLVAR"   />
+        <field num="35" type="LLVAR"   />
+        <field num="37" type="ALPHA"   length="12" />
+        <field num="41" type="ALPHA"   length="8"  />
+        <field num="42" type="ALPHA"   length="15" />
+        <field num="43" type="ALPHA"   length="40" />
+        <field num="44" type="LLVAR"   />
+        <field num="48" type="LLLVAR"  />
+        <field num="49" type="NUMERIC" length="3"  />
+        <field num="50" type="ALPHA"   length="3"  />
+        <field num="51" type="NUMERIC" length="3"  />
+        <field num="52" type="BINARY"  length="8"  />
+        <field num="54" type="LLVAR"   />
+        <field num="55" type="LLLVAR"  />
+        <field num="56" type="LLVAR"   />
+        <field num="57" type="LLLVAR"  />
+        <field num="59" type="LLLVAR"  />
+        <field num="60" type="LLLVAR"  />
+        <field num="62" type="LLLVAR"  />
+        <field num="63" type="LLLVAR"  />
+        <field num="64" type="BINARY"  length="8"  />
+        <field num="65" type="BINARY"  length="8"  />
+        <field num="67" type="NUMERIC" length="2"  />
+        <field num="69" type="NUMERIC" length="3"  />
+        <field num="74" type="NUMERIC" length="10" />
+        <field num="84" type="LLVAR"   />
+        <field num="90" type="LLVAR"   />
+        <field num="95" type="LLVAR"   />
+        <field num="123" type="LLLVAR" />
+    </parse>
+
+    <!-- 0110 Authorization Response -->
+    <parse type="0110">
+        <field num="2"  type="LLVAR"   />
+        <field num="3"  type="NUMERIC" length="6"  />
+        <field num="4"  type="NUMERIC" length="12" />
+        <field num="7"  type="DATE10"  />
+        <field num="8"  type="NUMERIC" length="8"  />
+        <field num="10" type="NUMERIC" length="8"  />
+        <field num="11" type="NUMERIC" length="6"  />
+        <field num="12" type="TIME"    />
+        <field num="13" type="DATE4"   />
+        <field num="14" type="DATE_EXP"/>
+        <field num="16" type="NUMERIC" length="4"  />
+        <field num="17" type="NUMERIC" length="4"  />
+        <field num="18" type="NUMERIC" length="4"  />
+        <field num="22" type="NUMERIC" length="3"  />
+        <field num="23" type="NUMERIC" length="3"  />
+        <field num="24" type="NUMERIC" length="3"  />
+        <field num="26" type="NUMERIC" length="2"  />
+        <field num="32" type="LLVAR"   />
+        <field num="33" type="LLVAR"   />
+        <field num="35" type="LLVAR"   />
+        <field num="37" type="ALPHA"   length="12" />
+        <field num="38" type="ALPHA"   length="6"  />
+        <field num="39" type="ALPHA"   length="2"  />
+        <field num="41" type="ALPHA"   length="8"  />
+        <field num="42" type="ALPHA"   length="15" />
+        <field num="44" type="LLVAR"   />
+        <field num="48" type="LLLVAR"  />
+        <field num="49" type="NUMERIC" length="3"  />
+        <field num="50" type="ALPHA"   length="3"  />
+        <field num="51" type="NUMERIC" length="3"  />
+        <field num="54" type="LLVAR"   />
+        <field num="55" type="LLLVAR"  />
+        <field num="56" type="LLVAR"   />
+        <field num="62" type="LLLVAR"  />
+        <field num="63" type="LLLVAR"  />
+        <field num="64" type="BINARY"  length="8"  />
+        <field num="74" type="NUMERIC" length="10" />
+        <field num="84" type="LLVAR"   />
+        <field num="123" type="LLLVAR" />
+    </parse>
+
+    <!-- 0200 Financial Request -->
+    <parse type="0200">
+        <field num="2"  type="LLVAR"   />
+        <field num="3"  type="NUMERIC" length="6"  />
+        <field num="4"  type="NUMERIC" length="12" />
+        <field num="7"  type="DATE10"  />
+        <field num="8"  type="NUMERIC" length="8"  />
+        <field num="10" type="NUMERIC" length="8"  />
+        <field num="11" type="NUMERIC" length="6"  />
+        <field num="12" type="TIME"    />
+        <field num="13" type="DATE4"   />
+        <field num="14" type="DATE_EXP"/>
+        <field num="16" type="NUMERIC" length="4"  />
+        <field num="17" type="NUMERIC" length="4"  />
+        <field num="18" type="NUMERIC" length="4"  />
+        <field num="22" type="NUMERIC" length="3"  />
+        <field num="23" type="NUMERIC" length="3"  />
+        <field num="24" type="NUMERIC" length="3"  />
+        <field num="25" type="NUMERIC" length="2"  />
+        <field num="26" type="NUMERIC" length="2"  />
+        <field num="27" type="NUMERIC" length="1"  />
+        <field num="28" type="ALPHA"   length="9"  />
+        <field num="30" type="NUMERIC" length="8"  />
+        <field num="32" type="LLVAR"   />
+        <field num="33" type="LLVAR"   />
+        <field num="35" type="LLVAR"   />
+        <field num="37" type="ALPHA"   length="12" />
+        <field num="41" type="ALPHA"   length="8"  />
+        <field num="42" type="ALPHA"   length="15" />
+        <field num="43" type="ALPHA"   length="40" />
+        <field num="44" type="LLVAR"   />
+        <field num="48" type="LLLVAR"  />
+        <field num="49" type="NUMERIC" length="3"  />
+        <field num="50" type="ALPHA"   length="3"  />
+        <field num="51" type="NUMERIC" length="3"  />
+        <field num="52" type="BINARY"  length="8"  />
+        <field num="54" type="LLVAR"   />
+        <field num="55" type="LLLVAR"  />
+        <field num="56" type="LLVAR"   />
+        <field num="57" type="LLLVAR"  />
+        <field num="59" type="LLLVAR"  />
+        <field num="60" type="LLLVAR"  />
+        <field num="62" type="LLLVAR"  />
+        <field num="63" type="LLLVAR"  />
+        <field num="64" type="BINARY"  length="8"  />
+        <field num="65" type="BINARY"  length="8"  />
+        <field num="67" type="NUMERIC" length="2"  />
+        <field num="69" type="NUMERIC" length="3"  />
+        <field num="74" type="NUMERIC" length="10" />
+        <field num="84" type="LLVAR"   />
+        <field num="90" type="LLVAR"   />
+        <field num="95" type="LLVAR"   />
+        <field num="123" type="LLLVAR" />
+    </parse>
+
+    <!-- 0210 Financial Response -->
+    <parse type="0210">
+        <field num="2"  type="LLVAR"   />
+        <field num="3"  type="NUMERIC" length="6"  />
+        <field num="4"  type="NUMERIC" length="12" />
+        <field num="7"  type="DATE10"  />
+        <field num="8"  type="NUMERIC" length="8"  />
+        <field num="10" type="NUMERIC" length="8"  />
+        <field num="11" type="NUMERIC" length="6"  />
+        <field num="12" type="TIME"    />
+        <field num="13" type="DATE4"   />
+        <field num="14" type="DATE_EXP"/>
+        <field num="16" type="NUMERIC" length="4"  />
+        <field num="17" type="NUMERIC" length="4"  />
+        <field num="18" type="NUMERIC" length="4"  />
+        <field num="22" type="NUMERIC" length="3"  />
+        <field num="23" type="NUMERIC" length="3"  />
+        <field num="24" type="NUMERIC" length="3"  />
+        <field num="32" type="LLVAR"   />
+        <field num="33" type="LLVAR"   />
+        <field num="35" type="LLVAR"   />
+        <field num="37" type="ALPHA"   length="12" />
+        <field num="38" type="ALPHA"   length="6"  />
+        <field num="39" type="ALPHA"   length="2"  />
+        <field num="41" type="ALPHA"   length="8"  />
+        <field num="42" type="ALPHA"   length="15" />
+        <field num="44" type="LLVAR"   />
+        <field num="48" type="LLLVAR"  />
+        <field num="49" type="NUMERIC" length="3"  />
+        <field num="50" type="ALPHA"   length="3"  />
+        <field num="51" type="NUMERIC" length="3"  />
+        <field num="54" type="LLVAR"   />
+        <field num="55" type="LLLVAR"  />
+        <field num="56" type="LLVAR"   />
+        <field num="62" type="LLLVAR"  />
+        <field num="63" type="LLLVAR"  />
+        <field num="64" type="BINARY"  length="8"  />
+        <field num="74" type="NUMERIC" length="10" />
+        <field num="84" type="LLVAR"   />
+        <field num="123" type="LLLVAR" />
+    </parse>
+
+    <!-- 0420 Reversal Advice Request -->
+    <parse type="0420">
+        <field num="2"  type="LLVAR"   />
+        <field num="3"  type="NUMERIC" length="6"  />
+        <field num="4"  type="NUMERIC" length="12" />
+        <field num="7"  type="DATE10"  />
+        <field num="8"  type="NUMERIC" length="8"  />
+        <field num="10" type="NUMERIC" length="8"  />
+        <field num="11" type="NUMERIC" length="6"  />
+        <field num="12" type="TIME"    />
+        <field num="13" type="DATE4"   />
+        <field num="14" type="DATE_EXP"/>
+        <field num="16" type="NUMERIC" length="4"  />
+        <field num="17" type="NUMERIC" length="4"  />
+        <field num="18" type="NUMERIC" length="4"  />
+        <field num="22" type="NUMERIC" length="3"  />
+        <field num="23" type="NUMERIC" length="3"  />
+        <field num="24" type="NUMERIC" length="3"  />
+        <field num="25" type="NUMERIC" length="2"  />
+        <field num="26" type="NUMERIC" length="2"  />
+        <field num="27" type="NUMERIC" length="1"  />
+        <field num="28" type="ALPHA"   length="9"  />
+        <field num="30" type="NUMERIC" length="8"  />
+        <field num="32" type="LLVAR"   />
+        <field num="33" type="LLVAR"   />
+        <field num="35" type="LLVAR"   />
+        <field num="37" type="ALPHA"   length="12" />
+        <field num="41" type="ALPHA"   length="8"  />
+        <field num="42" type="ALPHA"   length="15" />
+        <field num="43" type="ALPHA"   length="40" />
+        <field num="44" type="LLVAR"   />
+        <field num="48" type="LLLVAR"  />
+        <field num="49" type="NUMERIC" length="3"  />
+        <field num="50" type="ALPHA"   length="3"  />
+        <field num="51" type="NUMERIC" length="3"  />
+        <field num="52" type="BINARY"  length="8"  />
+        <field num="54" type="LLVAR"   />
+        <field num="55" type="LLLVAR"  />
+        <field num="56" type="LLVAR"   />
+        <field num="57" type="LLLVAR"  />
+        <field num="59" type="LLLVAR"  />
+        <field num="60" type="LLLVAR"  />
+        <field num="62" type="LLLVAR"  />
+        <field num="63" type="LLLVAR"  />
+        <field num="64" type="BINARY"  length="8"  />
+        <field num="65" type="BINARY"  length="8"  />
+        <field num="67" type="NUMERIC" length="2"  />
+        <field num="69" type="NUMERIC" length="3"  />
+        <field num="74" type="NUMERIC" length="10" />
+        <field num="84" type="LLVAR"   />
+        <field num="90" type="LLVAR"   />
+        <field num="95" type="LLVAR"   />
+        <field num="123" type="LLLVAR" />
+    </parse>
+
+    <!-- 0430 Reversal Advice Response -->
+    <parse type="0430">
+        <field num="2"  type="LLVAR"   />
+        <field num="3"  type="NUMERIC" length="6"  />
+        <field num="4"  type="NUMERIC" length="12" />
+        <field num="7"  type="DATE10"  />
+        <field num="8"  type="NUMERIC" length="8"  />
+        <field num="10" type="NUMERIC" length="8"  />
+        <field num="11" type="NUMERIC" length="6"  />
+        <field num="12" type="TIME"    />
+        <field num="13" type="DATE4"   />
+        <field num="14" type="DATE_EXP"/>
+        <field num="16" type="NUMERIC" length="4"  />
+        <field num="17" type="NUMERIC" length="4"  />
+        <field num="18" type="NUMERIC" length="4"  />
+        <field num="22" type="NUMERIC" length="3"  />
+        <field num="23" type="NUMERIC" length="3"  />
+        <field num="24" type="NUMERIC" length="3"  />
+        <field num="26" type="NUMERIC" length="2"  />
+        <field num="32" type="LLVAR"   />
+        <field num="33" type="LLVAR"   />
+        <field num="35" type="LLVAR"   />
+        <field num="37" type="ALPHA"   length="12" />
+        <field num="38" type="ALPHA"   length="6"  />
+        <field num="39" type="ALPHA"   length="2"  />
+        <field num="41" type="ALPHA"   length="8"  />
+        <field num="42" type="ALPHA"   length="15" />
+        <field num="44" type="LLVAR"   />
+        <field num="48" type="LLLVAR"  />
+        <field num="49" type="NUMERIC" length="3"  />
+        <field num="50" type="ALPHA"   length="3"  />
+        <field num="51" type="NUMERIC" length="3"  />
+        <field num="54" type="LLVAR"   />
+        <field num="55" type="LLLVAR"  />
+        <field num="56" type="LLVAR"   />
+        <field num="62" type="LLLVAR"  />
+        <field num="63" type="LLLVAR"  />
+        <field num="64" type="BINARY"  length="8"  />
+        <field num="74" type="NUMERIC" length="10" />
+        <field num="84" type="LLVAR"   />
+        <field num="123" type="LLLVAR" />
+    </parse>
+
+    <!-- 0800 Network Management Request (extended bitmap from Neapay) -->
+    <parse type="0800">
+        <field num="3"  type="NUMERIC" length="6"  />
+        <field num="7"  type="DATE10"  />
+        <field num="11" type="NUMERIC" length="6"  />
+        <field num="12" type="TIME"    />
+        <field num="13" type="DATE4"   />
+        <field num="34" type="LLVAR"   />
+        <field num="35" type="LLVAR"   />
+        <field num="41" type="ALPHA"   length="8"  />
+        <field num="42" type="ALPHA"   length="15" />
+        <field num="43" type="ALPHA"   length="40" />
+        <field num="44" type="LLVAR"   />
+        <field num="48" type="LLLVAR"  />
+        <field num="50" type="ALPHA"   length="3"  />
+        <field num="51" type="NUMERIC" length="3"  />
+        <field num="52" type="BINARY"  length="8"  />
+        <field num="54" type="LLVAR"   />
+        <field num="56" type="LLVAR"   />
+        <field num="57" type="LLLVAR"  />
+        <field num="59" type="LLLVAR"  />
+        <field num="60" type="LLLVAR"  />
+        <field num="63" type="LLLVAR"  />
+        <field num="64" type="BINARY"  length="8"  />
+        <field num="65" type="BINARY"  length="8"  />
+        <field num="67" type="NUMERIC" length="2"  />
+        <field num="70" type="NUMERIC" length="3"  />
+    </parse>
+
+    <!-- 0810 Network Management Response -->
+    <parse type="0810">
+        <field num="7"  type="DATE10"  />
+        <field num="11" type="NUMERIC" length="6"  />
+        <field num="12" type="TIME"    />
+        <field num="34" type="LLVAR"   />
+        <field num="35" type="LLVAR"   />
+        <field num="39" type="ALPHA"   length="2"  />
+        <field num="44" type="LLVAR"   />
+        <field num="48" type="LLLVAR"  />
+        <field num="56" type="LLVAR"   />
+        <field num="63" type="LLLVAR"  />
+        <field num="64" type="BINARY"  length="8"  />
+    </parse>
+
+</j8583-config>

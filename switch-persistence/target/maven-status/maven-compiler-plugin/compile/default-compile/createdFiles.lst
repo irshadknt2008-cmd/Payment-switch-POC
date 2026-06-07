@@ -1,0 +1,7 @@
+com\paymentswitch\persistence\repository\TransactionRepository.class
+com\paymentswitch\persistence\config\MyBatisConfig.class
+com\paymentswitch\persistence\entity\TransactionRecord.class
+com\paymentswitch\persistence\mapper\BinTableMapper.class
+com\paymentswitch\persistence\config\DataSourceConfig.class
+com\paymentswitch\persistence\config\FlywayMigrator.class
+com\paymentswitch\persistence\mapper\TransactionMapper.class

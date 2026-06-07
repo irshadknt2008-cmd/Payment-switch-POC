@@ -1,0 +1,514 @@
+2026-06-07 12:38:33.895 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 12:38:33.912 [main] INFO  c.p.bootstrap.SwitchApplication -   Payment Switch – Starting Up
+2026-06-07 12:38:33.912 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 12:38:33.967 [main] INFO  c.p.bootstrap.SwitchContext - Loaded configuration from switch.properties
+2026-06-07 12:38:33.967 [main] INFO  c.p.bootstrap.SwitchContext - [1/6] Initialising persistence...
+2026-06-07 12:38:33.978 [main] INFO  c.p.p.config.DataSourceConfig - DataSource configured: localhost:5432/payment_switch pool=10
+2026-06-07 12:38:33.998 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Starting...
+2026-06-07 12:38:34.854 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Start completed.
+2026-06-07 12:38:34.856 [main] INFO  c.p.p.config.FlywayMigrator - Running Flyway database migrations...
+2026-06-07 12:38:35.225 [main] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.5.13 by Redgate
+2026-06-07 12:38:35.226 [main] INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
+2026-06-07 12:38:35.226 [main] INFO  o.f.c.i.license.VersionPrinter - 
+2026-06-07 12:38:35.375 [main] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:postgresql://localhost:5432/payment_switch (PostgreSQL 18.1)
+2026-06-07 12:38:35.402 [main] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: PostgreSQL 18.1 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 14.
+2026-06-07 12:38:35.617 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.159s)
+2026-06-07 12:38:35.649 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 2
+2026-06-07 12:38:35.652 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-06-07 12:38:35.686 [main] INFO  c.p.p.config.FlywayMigrator - Flyway migration complete. 0 migration(s) applied.
+2026-06-07 12:38:36.092 [main] INFO  c.p.bootstrap.SwitchContext - [2/6] Building ISO 8583 codecs...
+2026-06-07 12:38:36.234 [main] INFO  c.p.bootstrap.SwitchContext - [3/6] Building routing service...
+2026-06-07 12:38:36.236 [main] INFO  c.p.r.i.InMemoryBinTableRepository - Loaded 3 default BIN table entries
+2026-06-07 12:38:36.239 [main] INFO  c.p.bootstrap.SwitchContext - [4/6] Connecting issuer client pool...
+2026-06-07 12:38:40.346 [main] ERROR c.p.issuer.IssuerClientPool - Failed to connect to IssuerEndpoint{9009 @ localhost:9583}: Failed to connect to IssuerEndpoint{9009 @ localhost:9583}
+2026-06-07 12:38:42.684 [main] ERROR c.p.issuer.IssuerClientPool - Failed to connect to IssuerEndpoint{9009 @ localhost:9583}: Failed to connect to IssuerEndpoint{9009 @ localhost:9583}
+2026-06-07 12:38:42.685 [main] INFO  c.p.issuer.IssuerClientPool - Pool for issuer 9009 ready with 0 active connections
+2026-06-07 12:38:42.685 [main] INFO  c.p.bootstrap.SwitchContext - [5/6] Starting acquirer server...
+2026-06-07 12:38:42.727 [main] INFO  c.p.acquirer.AcquirerServer - AcquirerServer listening on port 9998
+2026-06-07 12:38:42.728 [main] INFO  c.p.bootstrap.SwitchContext - [6/6] Switch fully initialised and ready.
+2026-06-07 12:38:42.729 [main] INFO  c.p.bootstrap.SwitchApplication - Payment Switch is running. Press Ctrl+C to stop.
+2026-06-07 12:48:28.387 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:61525
+2026-06-07 12:48:32.453 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 18: unspecified in parsing guide for type 100
+2026-06-07 12:48:32.453 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 23: unspecified in parsing guide for type 100
+2026-06-07 12:48:32.453 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 26: unspecified in parsing guide for type 100
+2026-06-07 12:48:32.454 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 28: unspecified in parsing guide for type 100
+2026-06-07 12:48:32.454 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 32: unspecified in parsing guide for type 100
+2026-06-07 12:48:32.454 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 51: unspecified in parsing guide for type 100
+2026-06-07 12:48:32.463 [nioEventLoopGroup-4-1] ERROR c.p.a.handler.AcquirerMessageHandler - Uncaught exception on acquirer channel /127.0.0.1:61525: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+io.netty.handler.codec.DecoderException: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+	at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:98)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1407)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+	at com.paymentswitch.iso8583.IsoMessageParser.parse(IsoMessageParser.java:43)
+	at com.paymentswitch.iso8583.codec.IsoMessageDecoder.decode(IsoMessageDecoder.java:31)
+	at com.paymentswitch.iso8583.codec.IsoMessageDecoder.decode(IsoMessageDecoder.java:1)
+	at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:88)
+	... 21 common frames omitted
+Caused by: java.text.ParseException: ISO8583 MessageFactory cannot parse fields
+	at com.solab.iso8583.MessageFactory.parseMessage(MessageFactory.java:539)
+	at com.solab.iso8583.MessageFactory.parseMessage(MessageFactory.java:387)
+	at com.paymentswitch.iso8583.IsoMessageParser.parse(IsoMessageParser.java:40)
+	... 24 common frames omitted
+2026-06-07 12:48:33.495 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:61525
+2026-06-07 12:49:28.905 [nioEventLoopGroup-4-2] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:61588
+2026-06-07 12:49:58.914 [nioEventLoopGroup-4-2] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:61588, closing.
+2026-06-07 12:49:58.915 [nioEventLoopGroup-4-2] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:61588
+2026-06-07 12:50:28.921 [nioEventLoopGroup-4-3] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:61628
+2026-06-07 12:50:58.928 [nioEventLoopGroup-4-3] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:61628, closing.
+2026-06-07 12:50:58.928 [nioEventLoopGroup-4-3] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:61628
+2026-06-07 12:51:28.933 [nioEventLoopGroup-4-4] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:61650
+2026-06-07 12:51:58.946 [nioEventLoopGroup-4-4] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:61650, closing.
+2026-06-07 12:51:58.946 [nioEventLoopGroup-4-4] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:61650
+2026-06-07 12:52:28.945 [nioEventLoopGroup-4-5] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:61693
+2026-06-07 12:52:58.956 [nioEventLoopGroup-4-5] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:61693, closing.
+2026-06-07 12:52:58.957 [nioEventLoopGroup-4-5] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:61693
+2026-06-07 13:31:08.986 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 13:31:08.995 [main] INFO  c.p.bootstrap.SwitchApplication -   Payment Switch – Starting Up
+2026-06-07 13:31:08.997 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 13:31:09.007 [main] INFO  c.p.bootstrap.SwitchContext - Loaded configuration from switch.properties
+2026-06-07 13:31:09.008 [main] INFO  c.p.bootstrap.SwitchContext - [1/6] Initialising persistence...
+2026-06-07 13:31:09.017 [main] INFO  c.p.p.config.DataSourceConfig - DataSource configured: localhost:5432/payment_switch pool=10
+2026-06-07 13:31:09.034 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Starting...
+2026-06-07 13:31:09.670 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Start completed.
+2026-06-07 13:31:09.672 [main] INFO  c.p.p.config.FlywayMigrator - Running Flyway database migrations...
+2026-06-07 13:31:09.920 [main] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.5.13 by Redgate
+2026-06-07 13:31:09.921 [main] INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
+2026-06-07 13:31:09.922 [main] INFO  o.f.c.i.license.VersionPrinter - 
+2026-06-07 13:31:10.031 [main] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:postgresql://localhost:5432/payment_switch (PostgreSQL 18.1)
+2026-06-07 13:31:10.059 [main] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: PostgreSQL 18.1 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 14.
+2026-06-07 13:31:10.211 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.096s)
+2026-06-07 13:31:10.237 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 2
+2026-06-07 13:31:10.239 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-06-07 13:31:10.270 [main] INFO  c.p.p.config.FlywayMigrator - Flyway migration complete. 0 migration(s) applied.
+2026-06-07 13:31:10.633 [main] INFO  c.p.bootstrap.SwitchContext - [2/6] Building ISO 8583 codecs...
+2026-06-07 13:31:10.723 [main] INFO  c.paymentswitch.iso8583.Iso8583Codec - Loaded iso8583-config.xml (ASCII hex bitmap, Neapay ISO8583-93 profile)
+2026-06-07 13:31:10.733 [main] INFO  c.p.bootstrap.SwitchContext - [3/6] Building routing service...
+2026-06-07 13:31:10.737 [main] INFO  c.p.r.i.InMemoryBinTableRepository - Loaded 3 default BIN table entries
+2026-06-07 13:31:10.741 [main] INFO  c.p.bootstrap.SwitchContext - [4/6] Connecting issuer client pool...
+2026-06-07 13:31:12.339 [main] INFO  c.p.issuer.IssuerConnection - Connected to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-07 13:31:12.342 [main] INFO  c.p.issuer.IssuerClientPool - Established connection 1/1 to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-07 13:31:12.345 [main] INFO  c.p.issuer.IssuerClientPool - Pool for issuer 9009 ready with 1 active connections
+2026-06-07 13:31:12.345 [main] INFO  c.p.bootstrap.SwitchContext - Registered issuer 9009 at 127.0.0.1:9009
+2026-06-07 13:31:12.345 [main] INFO  c.p.bootstrap.SwitchContext - [5/6] Starting acquirer server...
+2026-06-07 13:31:12.394 [main] INFO  c.p.acquirer.AcquirerServer - AcquirerServer listening on port 9998
+2026-06-07 13:31:12.395 [main] INFO  c.p.bootstrap.SwitchContext - [6/6] Switch fully initialised and ready.
+2026-06-07 13:31:12.395 [main] INFO  c.p.bootstrap.SwitchContext -   Acquirer listening on port 9998
+2026-06-07 13:31:12.396 [main] INFO  c.p.bootstrap.SwitchContext -   Default issuer: 9009
+2026-06-07 13:31:12.397 [main] INFO  c.p.bootstrap.SwitchApplication - Payment Switch is running. Press Ctrl+C to stop.
+2026-06-07 13:31:47.484 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:62854
+2026-06-07 13:32:12.363 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:32:17.485 [nioEventLoopGroup-4-1] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:62854, closing.
+2026-06-07 13:32:17.512 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:62854
+2026-06-07 13:32:47.483 [nioEventLoopGroup-4-2] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:62876
+2026-06-07 13:33:12.360 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:33:17.496 [nioEventLoopGroup-4-2] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:62876, closing.
+2026-06-07 13:33:17.497 [nioEventLoopGroup-4-2] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:62876
+2026-06-07 13:33:47.521 [nioEventLoopGroup-4-3] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:62892
+2026-06-07 13:34:12.362 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:34:17.524 [nioEventLoopGroup-4-3] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:62892, closing.
+2026-06-07 13:34:17.525 [nioEventLoopGroup-4-3] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:62892
+2026-06-07 13:34:47.570 [nioEventLoopGroup-4-4] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:62906
+2026-06-07 13:35:12.372 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:35:17.582 [nioEventLoopGroup-4-4] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:62906, closing.
+2026-06-07 13:35:17.583 [nioEventLoopGroup-4-4] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:62906
+2026-06-07 13:35:46.620 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 13:35:46.626 [main] INFO  c.p.bootstrap.SwitchApplication -   Payment Switch – Starting Up
+2026-06-07 13:35:46.627 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 13:35:46.636 [main] INFO  c.p.bootstrap.SwitchContext - Loaded configuration from switch.properties
+2026-06-07 13:35:46.637 [main] INFO  c.p.bootstrap.SwitchContext - [1/6] Initialising persistence...
+2026-06-07 13:35:46.647 [main] INFO  c.p.p.config.DataSourceConfig - DataSource configured: localhost:5432/payment_switch pool=10
+2026-06-07 13:35:46.665 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Starting...
+2026-06-07 13:35:47.306 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Start completed.
+2026-06-07 13:35:47.308 [main] INFO  c.p.p.config.FlywayMigrator - Running Flyway database migrations...
+2026-06-07 13:35:47.550 [main] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.5.13 by Redgate
+2026-06-07 13:35:47.551 [main] INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
+2026-06-07 13:35:47.552 [main] INFO  o.f.c.i.license.VersionPrinter - 
+2026-06-07 13:35:47.584 [nioEventLoopGroup-4-5] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:62929
+2026-06-07 13:35:47.665 [main] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:postgresql://localhost:5432/payment_switch (PostgreSQL 18.1)
+2026-06-07 13:35:47.694 [main] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: PostgreSQL 18.1 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 14.
+2026-06-07 13:35:47.820 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.085s)
+2026-06-07 13:35:47.847 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 2
+2026-06-07 13:35:47.849 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-06-07 13:35:47.887 [main] INFO  c.p.p.config.FlywayMigrator - Flyway migration complete. 0 migration(s) applied.
+2026-06-07 13:35:48.342 [main] INFO  c.p.bootstrap.SwitchContext - [2/6] Building ISO 8583 codecs...
+2026-06-07 13:35:48.426 [main] INFO  c.paymentswitch.iso8583.Iso8583Codec - Loaded iso8583-config.xml (ASCII hex bitmap, Neapay ISO8583-93 profile)
+2026-06-07 13:35:48.433 [main] INFO  c.p.bootstrap.SwitchContext - [3/6] Building routing service...
+2026-06-07 13:35:48.436 [main] INFO  c.p.r.i.InMemoryBinTableRepository - Loaded 3 default BIN table entries
+2026-06-07 13:35:48.438 [main] INFO  c.p.bootstrap.SwitchContext - [4/6] Connecting issuer client pool...
+2026-06-07 13:35:50.085 [main] INFO  c.p.issuer.IssuerConnection - Connected to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-07 13:35:50.088 [main] INFO  c.p.issuer.IssuerClientPool - Established connection 1/1 to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-07 13:35:50.088 [main] INFO  c.p.issuer.IssuerClientPool - Pool for issuer 9009 ready with 1 active connections
+2026-06-07 13:35:50.089 [main] INFO  c.p.bootstrap.SwitchContext - Registered issuer 9009 at 127.0.0.1:9009
+2026-06-07 13:35:50.089 [main] INFO  c.p.bootstrap.SwitchContext - [5/6] Starting acquirer server...
+2026-06-07 13:36:12.372 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:36:17.591 [nioEventLoopGroup-4-5] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:62929, closing.
+2026-06-07 13:36:17.591 [nioEventLoopGroup-4-5] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:62929
+2026-06-07 13:36:18.821 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 13:36:18.836 [main] INFO  c.p.bootstrap.SwitchApplication -   Payment Switch – Starting Up
+2026-06-07 13:36:18.837 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 13:36:18.844 [main] INFO  c.p.bootstrap.SwitchContext - Loaded configuration from switch.properties
+2026-06-07 13:36:18.845 [main] INFO  c.p.bootstrap.SwitchContext - [1/6] Initialising persistence...
+2026-06-07 13:36:18.855 [main] INFO  c.p.p.config.DataSourceConfig - DataSource configured: localhost:5432/payment_switch pool=10
+2026-06-07 13:36:18.871 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Starting...
+2026-06-07 13:36:19.664 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Start completed.
+2026-06-07 13:36:19.666 [main] INFO  c.p.p.config.FlywayMigrator - Running Flyway database migrations...
+2026-06-07 13:36:19.926 [main] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.5.13 by Redgate
+2026-06-07 13:36:19.927 [main] INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
+2026-06-07 13:36:19.927 [main] INFO  o.f.c.i.license.VersionPrinter - 
+2026-06-07 13:36:20.033 [main] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:postgresql://localhost:5432/payment_switch (PostgreSQL 18.1)
+2026-06-07 13:36:20.058 [main] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: PostgreSQL 18.1 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 14.
+2026-06-07 13:36:20.166 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.069s)
+2026-06-07 13:36:20.191 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 2
+2026-06-07 13:36:20.193 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-06-07 13:36:20.229 [main] INFO  c.p.p.config.FlywayMigrator - Flyway migration complete. 0 migration(s) applied.
+2026-06-07 13:36:20.681 [main] INFO  c.p.bootstrap.SwitchContext - [2/6] Building ISO 8583 codecs...
+2026-06-07 13:36:20.777 [main] INFO  c.paymentswitch.iso8583.Iso8583Codec - Loaded iso8583-config.xml (ASCII hex bitmap, Neapay ISO8583-93 profile)
+2026-06-07 13:36:20.785 [main] INFO  c.p.bootstrap.SwitchContext - [3/6] Building routing service...
+2026-06-07 13:36:20.788 [main] INFO  c.p.r.i.InMemoryBinTableRepository - Loaded 3 default BIN table entries
+2026-06-07 13:36:20.791 [main] INFO  c.p.bootstrap.SwitchContext - [4/6] Connecting issuer client pool...
+2026-06-07 13:36:22.256 [main] INFO  c.p.issuer.IssuerConnection - Connected to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-07 13:36:22.256 [main] INFO  c.p.issuer.IssuerClientPool - Established connection 1/1 to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-07 13:36:22.257 [main] INFO  c.p.issuer.IssuerClientPool - Pool for issuer 9009 ready with 1 active connections
+2026-06-07 13:36:22.257 [main] INFO  c.p.bootstrap.SwitchContext - Registered issuer 9009 at 127.0.0.1:9009
+2026-06-07 13:36:22.257 [main] INFO  c.p.bootstrap.SwitchContext - [5/6] Starting acquirer server...
+2026-06-07 13:36:47.601 [nioEventLoopGroup-4-6] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63036
+2026-06-07 13:37:12.375 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:37:17.601 [nioEventLoopGroup-4-6] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:63036, closing.
+2026-06-07 13:37:17.602 [nioEventLoopGroup-4-6] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:63036
+2026-06-07 13:37:22.271 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:37:47.611 [nioEventLoopGroup-4-7] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63077
+2026-06-07 13:38:12.387 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:38:17.614 [nioEventLoopGroup-4-7] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:63077, closing.
+2026-06-07 13:38:17.614 [nioEventLoopGroup-4-7] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:63077
+2026-06-07 13:38:22.268 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:38:47.629 [nioEventLoopGroup-4-8] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63107
+2026-06-07 13:39:12.401 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:39:17.641 [nioEventLoopGroup-4-8] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:63107, closing.
+2026-06-07 13:39:17.642 [nioEventLoopGroup-4-8] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:63107
+2026-06-07 13:39:22.276 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:39:47.640 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63133
+2026-06-07 13:40:12.414 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:40:17.643 [nioEventLoopGroup-4-1] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:63133, closing.
+2026-06-07 13:40:17.644 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:63133
+2026-06-07 13:40:22.290 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:40:47.653 [nioEventLoopGroup-4-2] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63203
+2026-06-07 13:41:12.415 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:41:17.664 [nioEventLoopGroup-4-2] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:63203, closing.
+2026-06-07 13:41:17.664 [nioEventLoopGroup-4-2] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:63203
+2026-06-07 13:41:22.293 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:41:47.668 [nioEventLoopGroup-4-3] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63218
+2026-06-07 13:42:12.417 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:42:17.679 [nioEventLoopGroup-4-3] WARN  c.p.a.handler.AcquirerMessageHandler - Idle timeout on acquirer channel /127.0.0.1:63218, closing.
+2026-06-07 13:42:17.680 [nioEventLoopGroup-4-3] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:63218
+2026-06-07 13:42:22.307 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:42:47.676 [nioEventLoopGroup-4-4] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63242
+2026-06-07 13:43:22.321 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer idle timeout on /127.0.0.1:9009
+2026-06-07 13:44:05.692 [nioEventLoopGroup-2-1] ERROR c.p.i.handler.IssuerResponseHandler - Error on issuer channel /127.0.0.1:9009: An existing connection was forcibly closed by the remote host
+java.io.IOException: An existing connection was forcibly closed by the remote host
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:378)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:255)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:356)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:750)
+2026-06-07 13:44:05.714 [nioEventLoopGroup-2-1] WARN  c.p.i.handler.IssuerResponseHandler - Issuer connection dropped: /127.0.0.1:9009
+2026-06-07 13:57:22.123 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 13:57:22.130 [main] INFO  c.p.bootstrap.SwitchApplication -   Payment Switch – Starting Up
+2026-06-07 13:57:22.131 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 13:57:22.142 [main] INFO  c.p.bootstrap.SwitchContext - Loaded configuration from switch.properties
+2026-06-07 13:57:22.143 [main] INFO  c.p.bootstrap.SwitchContext - [1/6] Initialising persistence...
+2026-06-07 13:57:22.153 [main] INFO  c.p.p.config.DataSourceConfig - DataSource configured: localhost:5432/payment_switch pool=10
+2026-06-07 13:57:22.170 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Starting...
+2026-06-07 13:57:22.748 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Start completed.
+2026-06-07 13:57:22.750 [main] INFO  c.p.p.config.FlywayMigrator - Running Flyway database migrations...
+2026-06-07 13:57:22.993 [main] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.5.13 by Redgate
+2026-06-07 13:57:22.997 [main] INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
+2026-06-07 13:57:23.002 [main] INFO  o.f.c.i.license.VersionPrinter - 
+2026-06-07 13:57:23.112 [main] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:postgresql://localhost:5432/payment_switch (PostgreSQL 18.1)
+2026-06-07 13:57:23.138 [main] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: PostgreSQL 18.1 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 14.
+2026-06-07 13:57:23.242 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.066s)
+2026-06-07 13:57:23.267 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 2
+2026-06-07 13:57:23.269 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-06-07 13:57:23.298 [main] INFO  c.p.p.config.FlywayMigrator - Flyway migration complete. 0 migration(s) applied.
+2026-06-07 13:57:23.657 [main] INFO  c.p.bootstrap.SwitchContext - [2/6] Building ISO 8583 codecs...
+2026-06-07 13:57:23.758 [main] INFO  c.paymentswitch.iso8583.Iso8583Codec - Loaded iso8583-config.xml (ASCII hex bitmap, Neapay ISO8583-93 profile)
+2026-06-07 13:57:23.770 [main] INFO  c.p.bootstrap.SwitchContext - [3/6] Building routing service...
+2026-06-07 13:57:23.774 [main] INFO  c.p.r.i.InMemoryBinTableRepository - Loaded 3 default BIN table entries
+2026-06-07 13:57:23.778 [main] INFO  c.p.bootstrap.SwitchContext - [4/6] Connecting issuer client pool...
+2026-06-07 13:57:27.388 [main] ERROR c.p.issuer.IssuerClientPool - Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-07 13:57:27.390 [main] INFO  c.p.issuer.IssuerClientPool - Pool for issuer 9009 ready with 0 active connections
+2026-06-07 13:57:27.390 [main] INFO  c.p.bootstrap.SwitchContext - Registered issuer 9009 at 127.0.0.1:9009
+2026-06-07 13:57:27.390 [main] INFO  c.p.bootstrap.SwitchContext - [5/6] Starting acquirer server...
+2026-06-07 13:57:27.425 [main] INFO  c.p.acquirer.AcquirerServer - AcquirerServer listening on port 9998
+2026-06-07 13:57:27.426 [main] INFO  c.p.bootstrap.SwitchContext - [6/6] Switch fully initialised and ready.
+2026-06-07 13:57:27.426 [main] INFO  c.p.bootstrap.SwitchContext -   Acquirer listening on port 9998
+2026-06-07 13:57:27.426 [main] INFO  c.p.bootstrap.SwitchContext -   Default issuer: 9009
+2026-06-07 13:57:27.428 [main] INFO  c.p.bootstrap.SwitchApplication - Payment Switch is running. Press Ctrl+C to stop.
+2026-06-07 13:58:34.451 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63756
+2026-06-07 13:59:18.818 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 63 bytes from /127.0.0.1:63756
+2026-06-07 13:59:18.822 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 34: unspecified in parsing guide for type 800
+2026-06-07 13:59:18.822 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 35: unspecified in parsing guide for type 800
+2026-06-07 13:59:18.822 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 42: unspecified in parsing guide for type 800
+2026-06-07 13:59:18.822 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 43: unspecified in parsing guide for type 800
+2026-06-07 13:59:18.823 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 44: unspecified in parsing guide for type 800
+2026-06-07 13:59:18.823 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 48: unspecified in parsing guide for type 800
+2026-06-07 13:59:18.823 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 51: unspecified in parsing guide for type 800
+2026-06-07 13:59:18.823 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 52: unspecified in parsing guide for type 800
+2026-06-07 13:59:18.823 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 54: unspecified in parsing guide for type 800
+2026-06-07 13:59:18.824 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 56: unspecified in parsing guide for type 800
+2026-06-07 13:59:18.824 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 57: unspecified in parsing guide for type 800
+2026-06-07 13:59:18.824 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 60: unspecified in parsing guide for type 800
+2026-06-07 13:59:18.824 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 64: unspecified in parsing guide for type 800
+2026-06-07 13:59:18.824 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 65: unspecified in parsing guide for type 800
+2026-06-07 13:59:18.825 [nioEventLoopGroup-4-1] ERROR c.p.iso8583.codec.IsoMessageDecoder - Failed to parse ISO message from /127.0.0.1:63756 (63 bytes): Failed to parse ISO 8583 message
+2026-06-07 13:59:18.831 [nioEventLoopGroup-4-1] ERROR c.p.iso8583.codec.IsoMessageDecoder - Raw hex: 30383030A238000000800000040000000000000030303030303030363037313335393138303030343837323630363037303630373230333930303539303030
+2026-06-07 13:59:18.839 [nioEventLoopGroup-4-1] ERROR c.p.a.handler.AcquirerMessageHandler - Uncaught exception on acquirer channel /127.0.0.1:63756: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+io.netty.handler.codec.DecoderException: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+	at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:98)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:289)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1407)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+	at com.paymentswitch.iso8583.IsoMessageParser.parse(IsoMessageParser.java:39)
+	at com.paymentswitch.iso8583.codec.IsoMessageDecoder.decode(IsoMessageDecoder.java:33)
+	at com.paymentswitch.iso8583.codec.IsoMessageDecoder.decode(IsoMessageDecoder.java:1)
+	at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:88)
+	... 25 common frames omitted
+Caused by: java.text.ParseException: ISO8583 MessageFactory cannot parse fields
+	at com.solab.iso8583.MessageFactory.parseMessage(MessageFactory.java:539)
+	at com.solab.iso8583.MessageFactory.parseMessage(MessageFactory.java:387)
+	at com.paymentswitch.iso8583.IsoMessageParser.parse(IsoMessageParser.java:34)
+	... 28 common frames omitted
+2026-06-07 13:59:18.843 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:63756
+2026-06-07 13:59:34.496 [nioEventLoopGroup-4-2] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63787
+2026-06-07 14:00:37.734 [nioEventLoopGroup-4-2] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 247 bytes from /127.0.0.1:63787
+2026-06-07 14:00:37.735 [nioEventLoopGroup-4-2] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 8: unspecified in parsing guide for type 100
+2026-06-07 14:00:37.735 [nioEventLoopGroup-4-2] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 10: unspecified in parsing guide for type 100
+2026-06-07 14:00:37.735 [nioEventLoopGroup-4-2] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 16: unspecified in parsing guide for type 100
+2026-06-07 14:00:37.735 [nioEventLoopGroup-4-2] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 17: unspecified in parsing guide for type 100
+2026-06-07 14:00:37.736 [nioEventLoopGroup-4-2] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 24: unspecified in parsing guide for type 100
+2026-06-07 14:00:37.736 [nioEventLoopGroup-4-2] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 27: unspecified in parsing guide for type 100
+2026-06-07 14:00:37.736 [nioEventLoopGroup-4-2] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 30: unspecified in parsing guide for type 100
+2026-06-07 14:00:37.736 [nioEventLoopGroup-4-2] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 55: unspecified in parsing guide for type 100
+2026-06-07 14:00:37.737 [nioEventLoopGroup-4-2] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 56: unspecified in parsing guide for type 100
+2026-06-07 14:00:37.738 [nioEventLoopGroup-4-2] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 62: unspecified in parsing guide for type 100
+2026-06-07 14:00:37.739 [nioEventLoopGroup-4-2] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 63: unspecified in parsing guide for type 100
+2026-06-07 14:00:37.739 [nioEventLoopGroup-4-2] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 69: unspecified in parsing guide for type 100
+2026-06-07 14:00:37.739 [nioEventLoopGroup-4-2] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 74: unspecified in parsing guide for type 100
+2026-06-07 14:00:37.739 [nioEventLoopGroup-4-2] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 84: unspecified in parsing guide for type 100
+2026-06-07 14:00:37.740 [nioEventLoopGroup-4-2] ERROR c.p.iso8583.codec.IsoMessageDecoder - Failed to parse ISO message from /127.0.0.1:63787 (247 bytes): Failed to parse ISO 8583 message
+2026-06-07 14:00:37.746 [nioEventLoopGroup-4-2] ERROR c.p.iso8583.codec.IsoMessageDecoder - Raw hex: 30313030723C46D128E0B00031363938373635303030303033303630383430313030303030303030303030303530303030363037313430303337303030343838...
+2026-06-07 14:00:37.747 [nioEventLoopGroup-4-2] ERROR c.p.a.handler.AcquirerMessageHandler - Uncaught exception on acquirer channel /127.0.0.1:63787: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+io.netty.handler.codec.DecoderException: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+	at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:98)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:289)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1407)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+	at com.paymentswitch.iso8583.IsoMessageParser.parse(IsoMessageParser.java:39)
+	at com.paymentswitch.iso8583.codec.IsoMessageDecoder.decode(IsoMessageDecoder.java:33)
+	at com.paymentswitch.iso8583.codec.IsoMessageDecoder.decode(IsoMessageDecoder.java:1)
+	at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:88)
+	... 25 common frames omitted
+Caused by: java.text.ParseException: ISO8583 MessageFactory cannot parse fields
+	at com.solab.iso8583.MessageFactory.parseMessage(MessageFactory.java:539)
+	at com.solab.iso8583.MessageFactory.parseMessage(MessageFactory.java:387)
+	at com.paymentswitch.iso8583.IsoMessageParser.parse(IsoMessageParser.java:34)
+	... 28 common frames omitted
+2026-06-07 14:00:37.751 [nioEventLoopGroup-4-2] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:63787
+2026-06-07 14:01:34.527 [nioEventLoopGroup-4-3] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63842
+2026-06-07 14:02:22.404 [nioEventLoopGroup-4-3] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 63 bytes from /127.0.0.1:63842
+2026-06-07 14:02:22.404 [nioEventLoopGroup-4-3] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 34: unspecified in parsing guide for type 800
+2026-06-07 14:02:22.405 [nioEventLoopGroup-4-3] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 35: unspecified in parsing guide for type 800
+2026-06-07 14:02:22.405 [nioEventLoopGroup-4-3] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 42: unspecified in parsing guide for type 800
+2026-06-07 14:02:22.405 [nioEventLoopGroup-4-3] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 43: unspecified in parsing guide for type 800
+2026-06-07 14:02:22.405 [nioEventLoopGroup-4-3] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 44: unspecified in parsing guide for type 800
+2026-06-07 14:02:22.405 [nioEventLoopGroup-4-3] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 48: unspecified in parsing guide for type 800
+2026-06-07 14:02:22.406 [nioEventLoopGroup-4-3] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 50: unspecified in parsing guide for type 800
+2026-06-07 14:02:22.406 [nioEventLoopGroup-4-3] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 59: unspecified in parsing guide for type 800
+2026-06-07 14:02:22.406 [nioEventLoopGroup-4-3] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 63: unspecified in parsing guide for type 800
+2026-06-07 14:02:22.406 [nioEventLoopGroup-4-3] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 67: unspecified in parsing guide for type 800
+2026-06-07 14:02:22.406 [nioEventLoopGroup-4-3] ERROR c.p.iso8583.codec.IsoMessageDecoder - Failed to parse ISO message from /127.0.0.1:63842 (63 bytes): Failed to parse ISO 8583 message
+2026-06-07 14:02:22.411 [nioEventLoopGroup-4-3] ERROR c.p.iso8583.codec.IsoMessageDecoder - Raw hex: 30383030A238000000800000040000000000000030303030303030363037313430323232303030343839323630363037303630373230333930303539303031
+2026-06-07 14:02:22.413 [nioEventLoopGroup-4-3] ERROR c.p.a.handler.AcquirerMessageHandler - Uncaught exception on acquirer channel /127.0.0.1:63842: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+io.netty.handler.codec.DecoderException: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+	at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:98)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:289)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1407)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+	at com.paymentswitch.iso8583.IsoMessageParser.parse(IsoMessageParser.java:39)
+	at com.paymentswitch.iso8583.codec.IsoMessageDecoder.decode(IsoMessageDecoder.java:33)
+	at com.paymentswitch.iso8583.codec.IsoMessageDecoder.decode(IsoMessageDecoder.java:1)
+	at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:88)
+	... 25 common frames omitted
+Caused by: java.text.ParseException: ISO8583 MessageFactory cannot parse fields
+	at com.solab.iso8583.MessageFactory.parseMessage(MessageFactory.java:539)
+	at com.solab.iso8583.MessageFactory.parseMessage(MessageFactory.java:387)
+	at com.paymentswitch.iso8583.IsoMessageParser.parse(IsoMessageParser.java:34)
+	... 28 common frames omitted
+2026-06-07 14:02:22.414 [nioEventLoopGroup-4-3] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:63842
+2026-06-07 14:02:34.529 [nioEventLoopGroup-4-4] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63876
+2026-06-07 14:03:20.806 [nioEventLoopGroup-4-4] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 260 bytes from /127.0.0.1:63876
+2026-06-07 14:03:20.807 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 8: unspecified in parsing guide for type 100
+2026-06-07 14:03:20.808 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 10: unspecified in parsing guide for type 100
+2026-06-07 14:03:20.808 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 16: unspecified in parsing guide for type 100
+2026-06-07 14:03:20.808 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 17: unspecified in parsing guide for type 100
+2026-06-07 14:03:20.808 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 24: unspecified in parsing guide for type 100
+2026-06-07 14:03:20.808 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 27: unspecified in parsing guide for type 100
+2026-06-07 14:03:20.808 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 30: unspecified in parsing guide for type 100
+2026-06-07 14:03:20.809 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 55: unspecified in parsing guide for type 100
+2026-06-07 14:03:20.809 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 56: unspecified in parsing guide for type 100
+2026-06-07 14:03:20.809 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 62: unspecified in parsing guide for type 100
+2026-06-07 14:03:20.809 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 63: unspecified in parsing guide for type 100
+2026-06-07 14:03:20.809 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 69: unspecified in parsing guide for type 100
+2026-06-07 14:03:20.809 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 74: unspecified in parsing guide for type 100
+2026-06-07 14:03:20.809 [nioEventLoopGroup-4-4] ERROR c.p.iso8583.codec.IsoMessageDecoder - Failed to parse ISO message from /127.0.0.1:63876 (260 bytes): Failed to parse ISO 8583 message
+2026-06-07 14:03:20.813 [nioEventLoopGroup-4-4] ERROR c.p.iso8583.codec.IsoMessageDecoder - Raw hex: 30313030723C46D1A8E0B00031363938373635303030303033303630383430303030303030303030303030303130303030363037313430333230303030343930...
+2026-06-07 14:03:20.814 [nioEventLoopGroup-4-4] ERROR c.p.a.handler.AcquirerMessageHandler - Uncaught exception on acquirer channel /127.0.0.1:63876: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+io.netty.handler.codec.DecoderException: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+	at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:98)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:289)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1407)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: com.paymentswitch.common.exception.MessageParseException: Failed to parse ISO 8583 message
+	at com.paymentswitch.iso8583.IsoMessageParser.parse(IsoMessageParser.java:39)
+	at com.paymentswitch.iso8583.codec.IsoMessageDecoder.decode(IsoMessageDecoder.java:33)
+	at com.paymentswitch.iso8583.codec.IsoMessageDecoder.decode(IsoMessageDecoder.java:1)
+	at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:88)
+	... 25 common frames omitted
+Caused by: java.text.ParseException: ISO8583 MessageFactory cannot parse fields
+	at com.solab.iso8583.MessageFactory.parseMessage(MessageFactory.java:539)
+	at com.solab.iso8583.MessageFactory.parseMessage(MessageFactory.java:387)
+	at com.paymentswitch.iso8583.IsoMessageParser.parse(IsoMessageParser.java:34)
+	... 28 common frames omitted
+2026-06-07 14:03:20.824 [nioEventLoopGroup-4-4] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:63876
+2026-06-07 14:03:34.538 [nioEventLoopGroup-4-5] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63898
+2026-06-07 14:08:34.557 [nioEventLoopGroup-4-5] WARN  c.p.a.handler.AcquirerMessageHandler - Reader idle timeout on acquirer channel /127.0.0.1:63898, closing.
+2026-06-07 14:08:34.559 [nioEventLoopGroup-4-5] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:63898
+2026-06-07 14:08:34.624 [nioEventLoopGroup-4-6] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:64076
+2026-06-07 14:13:34.625 [nioEventLoopGroup-4-6] WARN  c.p.a.handler.AcquirerMessageHandler - Reader idle timeout on acquirer channel /127.0.0.1:64076, closing.
+2026-06-07 14:13:34.626 [nioEventLoopGroup-4-6] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:64076
+2026-06-07 14:13:34.833 [nioEventLoopGroup-4-7] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:64261
+2026-06-07 14:18:38.975 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 14:18:38.982 [main] INFO  c.p.bootstrap.SwitchApplication -   Payment Switch – Starting Up
+2026-06-07 14:18:38.983 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
