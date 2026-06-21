@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.Map;
 
 public class IssuerConnection {
 
@@ -99,10 +100,15 @@ public class IssuerConnection {
         CompletableFuture<SwitchMessage> responseFuture = new CompletableFuture<>();
         pendingRequests.put(stan, responseFuture);
 
+        log.info("Sending to issuer {}:\n{}", endpoint, request.toSimString());
         channel.writeAndFlush(request).addListener(writeFuture -> {
             if (!writeFuture.isSuccess()) {
                 pendingRequests.remove(stan);
+                log.error("Failed to send STAN {} to issuer {}: {}",
+                        stan, endpoint, writeFuture.cause() != null ? writeFuture.cause().getMessage() : "unknown error");
                 responseFuture.completeExceptionally(writeFuture.cause());
+            } else {
+                log.debug("Queued STAN {} for issuer {}", stan, endpoint);
             }
         });
 
@@ -122,6 +128,23 @@ public class IssuerConnection {
         CompletableFuture<SwitchMessage> future = pendingRequests.remove(stan);
         if (future != null) {
             future.complete(response);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean completeSinglePending(SwitchMessage response) {
+        if (pendingRequests.size() != 1) {
+            return false;
+        }
+
+        Map.Entry<String, CompletableFuture<SwitchMessage>> entry = pendingRequests.entrySet().iterator().next();
+        if (entry == null) {
+            return false;
+        }
+
+        if (pendingRequests.remove(entry.getKey(), entry.getValue())) {
+            entry.getValue().complete(response);
             return true;
         }
         return false;

@@ -81,10 +81,14 @@ public class IssuerClientPool {
             int idx = roundRobinCounters.get(issuerId).getAndIncrement() % size;
             IssuerConnection conn = connections.get(idx);
             if (conn.isActive()) {
+                log.info("Dispatching STAN {} to issuer {} via {}",
+                        message.getSystemTraceAuditNumber(), issuerId, conn.getEndpoint());
                 return conn.send(message);
             }
             tryConnect(conn, idx + 1, size);
             if (conn.isActive()) {
+                log.info("Dispatching STAN {} to issuer {} via {}",
+                        message.getSystemTraceAuditNumber(), issuerId, conn.getEndpoint());
                 return conn.send(message);
             }
         }

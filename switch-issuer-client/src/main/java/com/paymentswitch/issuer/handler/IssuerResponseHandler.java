@@ -26,10 +26,14 @@ public class IssuerResponseHandler extends SimpleChannelInboundHandler<SwitchMes
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, SwitchMessage response) {
-        log.info("Received response from issuer {}: {}", ctx.channel().remoteAddress(), response);
+        log.info("Received response from issuer {}:\n{}", ctx.channel().remoteAddress(), response.toSimString());
 
         String stan = response.getSystemTraceAuditNumber();
         if (stan == null) {
+            if (connection.completeSinglePending(response)) {
+                log.warn("Issuer response missing STAN (DE 11), correlated via single-pending fallback");
+                return;
+            }
             log.warn("Issuer response missing STAN (DE 11), cannot correlate");
             return;
         }

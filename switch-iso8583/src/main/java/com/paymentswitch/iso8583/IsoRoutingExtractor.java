@@ -16,39 +16,56 @@ final class IsoRoutingExtractor {
         if (raw.length < 20) return;
 
         int pos = 4;
-        boolean[] fields = parseAsciiBitmap(raw, pos);
-        if (fields == null) return;
-        pos += 16;
+        BitmapParseResult bitmap = parseBitmap(raw, pos);
+        if (bitmap == null) return;
+        boolean[] fields = bitmap.fields;
+        pos = bitmap.nextPos;
 
-        if (fields[1] && raw.length >= pos + 16) {
-            boolean[] secondary = parseAsciiBitmap(raw, pos);
+        if (fields[1]) {
+            BitmapParseResult secondary = parseBitmap(raw, pos);
             if (secondary != null) {
                 for (int de = 65; de <= 128; de++) {
-                    fields[de] = secondary[de - 64];
+                    fields[de] = secondary.fields[de - 64];
                 }
-                pos += 16;
+                pos = secondary.nextPos;
             }
         }
 
-        for (int de = 2; de <= 128 && pos < raw.length; de++) {
-            if (!fields[de]) continue;
-            int[] next = skipField(raw, pos, de);
-            if (next == null) break;
+        // Routing only needs PAN and STAN. Stop after DE 11 so malformed
+        // later fields cannot block issuer forwarding.
+        for (int de = 2; de <= 11 && pos < raw.length; de++) {
+            if (!fields[de]) {
+                continue;
+            }
+
+            int[] next = skipCoreField(raw, pos, de);
+            if (next == null) {
+                break;
+            }
+
             if (de == 2 && next[1] > 0) {
                 String pan = new String(raw, pos, Math.min(next[1], raw.length - pos), StandardCharsets.US_ASCII);
                 msg.setPan(pan);
                 msg.setField(2, pan);
-            }
-            if (de == 11 && next[1] >= 6) {
+            } else if (de == 11 && next[1] >= 6) {
                 String stan = new String(raw, pos, 6, StandardCharsets.US_ASCII);
                 msg.setSystemTraceAuditNumber(stan);
                 msg.setField(11, stan);
             }
+
             pos = next[0];
         }
     }
 
-    private static boolean[] parseAsciiBitmap(byte[] raw, int offset) {
+    private static BitmapParseResult parseBitmap(byte[] raw, int offset) {
+        BitmapParseResult ascii = parseAsciiBitmap(raw, offset);
+        if (ascii != null) {
+            return ascii;
+        }
+        return parseBinaryBitmap(raw, offset);
+    }
+
+    private static BitmapParseResult parseAsciiBitmap(byte[] raw, int offset) {
         if (raw.length < offset + 16) return null;
         String hex = new String(raw, offset, 16, StandardCharsets.US_ASCII);
         boolean[] present = new boolean[129];
@@ -63,65 +80,75 @@ final class IsoRoutingExtractor {
                 present[i + 1] = true;
             }
         }
-        return present;
+        return new BitmapParseResult(present, offset + 16);
     }
 
-    /** Returns [nextPosition, fieldLength] or null on error. */
-    private static int[] skipField(byte[] raw, int pos, int de) {
-        if (pos >= raw.length) return null;
+    private static BitmapParseResult parseBinaryBitmap(byte[] raw, int offset) {
+        if (raw.length < offset + 8) return null;
 
-        switch (de) {
-            case 2: case 32: case 33: case 34: case 35:
-            case 40: case 44: case 53: case 54: case 56:
-                return readLlvar(raw, pos);
-            case 41:
-                return fixed(raw, pos, 8);
-            case 48: case 55: case 57: case 59: case 60: case 61: case 62: case 63:
-                return readLllvar(raw, pos);
-            case 3: case 4: case 5: case 6: case 8: case 9: case 10:
-            case 11: case 16: case 17: case 18: case 19: case 20:
-            case 22: case 23: case 24: case 25: case 26:
-                return fixed(raw, pos, fieldLen(de));
-            case 7:
-                return fixed(raw, pos, 10);
-            case 12: case 13:
-                return fixed(raw, pos, 6);
-            case 14:
-                return fixed(raw, pos, 4);
-            case 27:
-                return fixed(raw, pos, 1);
-            case 28:
-                return fixed(raw, pos, 9);
-            case 30:
-                return fixed(raw, pos, 8);
-            case 37:
-                return fixed(raw, pos, 12);
-            case 38:
-                return fixed(raw, pos, 6);
-            case 39:
-                return fixed(raw, pos, 2);
-            case 42:
-                return fixed(raw, pos, 15);
-            case 43:
-                return fixed(raw, pos, 40);
-            case 49: case 51:
-                return fixed(raw, pos, 3);
-            case 50:
-                return fixed(raw, pos, 3);
-            case 52: case 64:
-                return fixed(raw, pos, 8);
-            case 70:
-                return fixed(raw, pos, 3);
-            default:
-                return readLlvar(raw, pos);
+        boolean[] present = new boolean[129];
+        boolean secondary = (raw[offset] & 0x80) != 0;
+
+        for (int i = 0; i < 8; i++) {
+            int value = raw[offset + i] & 0xFF;
+            for (int bit = 0; bit < 8; bit++) {
+                if ((value & (1 << (7 - bit))) != 0) {
+                    present[i * 8 + bit + 1] = true;
+                }
+            }
+        }
+
+        int nextPos = offset + 8;
+        if (secondary) {
+            if (raw.length < nextPos + 8) return null;
+            for (int i = 0; i < 8; i++) {
+                int value = raw[nextPos + i] & 0xFF;
+                for (int bit = 0; bit < 8; bit++) {
+                    if ((value & (1 << (7 - bit))) != 0) {
+                        present[64 + i * 8 + bit + 1] = true;
+                    }
+                }
+            }
+            nextPos += 8;
+        }
+
+        return new BitmapParseResult(present, nextPos);
+    }
+
+    private static final class BitmapParseResult {
+        final boolean[] fields;
+        final int nextPos;
+
+        BitmapParseResult(boolean[] fields, int nextPos) {
+            this.fields = fields;
+            this.nextPos = nextPos;
         }
     }
 
-    private static int fieldLen(int de) {
-        if (de == 11) return 6;
-        if (de == 3) return 6;
-        if (de == 4 || de == 5 || de == 6) return 12;
-        return 6;
+    /** Returns [nextPosition, fieldLength] or null on error. */
+    private static int[] skipCoreField(byte[] raw, int pos, int de) {
+        if (pos >= raw.length) return null;
+
+        switch (de) {
+            case 2:
+                return readLlvar(raw, pos);
+            case 3:
+                return fixed(raw, pos, 6);
+            case 4:
+            case 5:
+            case 6:
+                return fixed(raw, pos, 12);
+            case 7:
+                return fixed(raw, pos, 10);
+            case 8:
+            case 9:
+            case 10:
+                return fixed(raw, pos, 8);
+            case 11:
+                return fixed(raw, pos, 6);
+            default:
+                return null;
+        }
     }
 
     private static int[] fixed(byte[] raw, int pos, int len) {
@@ -130,10 +157,26 @@ final class IsoRoutingExtractor {
     }
 
     private static int[] readLlvar(byte[] raw, int pos) {
-        if (pos + 2 > raw.length) return null;
-        int len = parseInt2(raw, pos);
-        if (len < 0 || pos + 2 + len > raw.length) return null;
-        return new int[]{pos + 2 + len, len};
+        if (pos + 2 <= raw.length) {
+            int len = parseInt2(raw, pos);
+            if (len >= 0 && pos + 2 + len <= raw.length) {
+                return new int[]{pos + 2 + len, len};
+            }
+        }
+
+        if (pos + 1 <= raw.length) {
+            int bcdLen = parseBcd2(raw[pos]);
+            if (bcdLen >= 0 && pos + 1 + bcdLen <= raw.length) {
+                return new int[]{pos + 1 + bcdLen, bcdLen};
+            }
+
+            int binaryLen = raw[pos] & 0xFF;
+            if (pos + 1 + binaryLen <= raw.length) {
+                return new int[]{pos + 1 + binaryLen, binaryLen};
+            }
+        }
+
+        return null;
     }
 
     private static int[] readLllvar(byte[] raw, int pos) {
@@ -157,5 +200,14 @@ final class IsoRoutingExtractor {
         } catch (NumberFormatException e) {
             return -1;
         }
+    }
+
+    private static int parseBcd2(byte b) {
+        int hi = (b >> 4) & 0x0F;
+        int lo = b & 0x0F;
+        if (hi > 9 || lo > 9) {
+            return -1;
+        }
+        return hi * 10 + lo;
     }
 }

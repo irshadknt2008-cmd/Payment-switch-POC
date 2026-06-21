@@ -312,6 +312,7 @@
         <field num="42" type="ALPHA"   length="15" />
         <field num="43" type="ALPHA"   length="40" />
         <field num="44" type="LLVAR"   />
+        <field num="47" type="LLLVAR"  />
         <field num="48" type="LLLVAR"  />
         <field num="50" type="ALPHA"   length="3"  />
         <field num="51" type="NUMERIC" length="3"  />
@@ -324,6 +325,7 @@
         <field num="63" type="LLLVAR"  />
         <field num="64" type="BINARY"  length="8"  />
         <field num="65" type="BINARY"  length="8"  />
+        <field num="68" type="LLLVAR"  />
         <field num="67" type="NUMERIC" length="2"  />
         <field num="70" type="NUMERIC" length="3"  />
     </parse>
@@ -337,10 +339,12 @@
         <field num="35" type="LLVAR"   />
         <field num="39" type="ALPHA"   length="2"  />
         <field num="44" type="LLVAR"   />
+        <field num="47" type="LLLVAR"  />
         <field num="48" type="LLLVAR"  />
         <field num="56" type="LLVAR"   />
         <field num="63" type="LLLVAR"  />
         <field num="64" type="BINARY"  length="8"  />
+        <field num="68" type="LLLVAR"  />
     </parse>
 
 </j8583-config>

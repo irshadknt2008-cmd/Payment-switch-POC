@@ -35,7 +35,7 @@ public class IsoMessageAssembler {
     }
 
     private byte[] assembleFromFields(SwitchMessage msg) {
-        int mti = Integer.parseInt(msg.getMessageType().getMti());
+        int mti = Integer.parseInt(msg.getMessageType().getMti(), 16);
         IsoMessage iso = messageFactory.newMessage(mti);
 
         Map<Integer, String> fields = new TreeMap<>(msg.getRawFields());
@@ -94,7 +94,7 @@ public class IsoMessageAssembler {
         specs.put(43, new FieldSpec(IsoType.ALPHA,   40));
         specs.put(49, new FieldSpec(IsoType.NUMERIC, 3));
         specs.put(51, new FieldSpec(IsoType.NUMERIC, 3));
-        specs.put(52, new FieldSpec(IsoType.BINARY,  8));
+        specs.put(52, new FieldSpec(IsoType.ALPHA,   16));
         specs.put(70, new FieldSpec(IsoType.NUMERIC, 3));
         return specs;
     }

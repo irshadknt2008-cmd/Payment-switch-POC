@@ -14,23 +14,25 @@ public final class Iso8583Codec {
 
     private static final Logger log = LoggerFactory.getLogger(Iso8583Codec.class);
 
-    private final MessageFactory<IsoMessage> messageFactory;
+    private final MessageFactory<IsoMessage> asciiMessageFactory;
+    private final MessageFactory<IsoMessage> binaryMessageFactory;
     private final IsoMessageParser parser;
     private final IsoMessageAssembler assembler;
 
     public Iso8583Codec() {
-        this.messageFactory = buildFactory();
-        this.parser    = new IsoMessageParser(messageFactory);
-        this.assembler = new IsoMessageAssembler(messageFactory);
+        this.asciiMessageFactory  = buildFactory(false);
+        this.binaryMessageFactory = buildFactory(true);
+        this.parser    = new IsoMessageParser(asciiMessageFactory, binaryMessageFactory);
+        this.assembler = new IsoMessageAssembler(asciiMessageFactory);
     }
 
     public IsoMessageParser getParser()       { return parser; }
     public IsoMessageAssembler getAssembler() { return assembler; }
 
-    private static MessageFactory<IsoMessage> buildFactory() {
+    private static MessageFactory<IsoMessage> buildFactory(boolean binaryBitmap) {
         MessageFactory<IsoMessage> factory = new MessageFactory<>();
         factory.setCharacterEncoding("UTF-8");
-        factory.setUseBinaryBitmap(false);
+        factory.setUseBinaryBitmap(binaryBitmap);
         factory.setIgnoreLastMissingField(true);
         factory.setForceStringEncoding(false);
 
@@ -42,7 +44,8 @@ public final class Iso8583Codec {
 
         // Universal DE 2–128 guide – permanent fix for any Neapay bitmap combination
         Iso8583ParseGuideBuilder.applyTo(factory);
-        log.info("ISO 8583 codec ready (ASCII hex bitmap, universal parse guide DE 2–128)");
+        log.info("ISO 8583 codec ready ({} bitmap, universal parse guide DE 2–128)",
+                binaryBitmap ? "binary" : "ASCII hex");
         return factory;
     }
 }

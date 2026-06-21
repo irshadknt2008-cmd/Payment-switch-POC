@@ -3,6 +3,7 @@ package com.paymentswitch.acquirer.handler;
 import com.paymentswitch.common.exception.IssuerConnectionException;
 import com.paymentswitch.common.exception.RoutingException;
 import com.paymentswitch.common.model.MessageDirection;
+import com.paymentswitch.common.model.MessageType;
 import com.paymentswitch.common.model.ResponseCode;
 import com.paymentswitch.common.model.SwitchMessage;
 import com.paymentswitch.issuer.IssuerClientPool;
@@ -45,6 +46,11 @@ public class AcquirerMessageHandler extends SimpleChannelInboundHandler<SwitchMe
                 msg.getMaskedPan());
 
         try {
+            if (msg.getMessageType() == MessageType.NETWORK_MANAGEMENT_REQUEST) {
+                writeResponse(ctx, buildNetworkManagementResponse(msg));
+                return;
+            }
+
             routeMessage(msg);
 
             issuerClientPool.send(msg)
@@ -77,11 +83,7 @@ public class AcquirerMessageHandler extends SimpleChannelInboundHandler<SwitchMe
     private void writeResponse(ChannelHandlerContext ctx, SwitchMessage response) {
         response.setDirection(MessageDirection.OUTBOUND);
         ctx.writeAndFlush(response);
-        log.info("Sent to acquirer {}: type={} stan={} rc={}",
-                ctx.channel().remoteAddress(),
-                response.getMessageType(),
-                response.getSystemTraceAuditNumber(),
-                response.getResponseCode());
+        log.info("Sent to acquirer {}:\n{}", ctx.channel().remoteAddress(), response.toSimString());
     }
 
     @Override
@@ -129,11 +131,62 @@ public class AcquirerMessageHandler extends SimpleChannelInboundHandler<SwitchMe
         return resp;
     }
 
+    private SwitchMessage buildNetworkManagementResponse(SwitchMessage req) {
+        SwitchMessage resp = new SwitchMessage();
+        resp.setMessageType(MessageType.NETWORK_MANAGEMENT_RESPONSE);
+        resp.setDirection(MessageDirection.OUTBOUND);
+        resp.setResponseCode(ResponseCode.APPROVED);
+        resp.setSystemTraceAuditNumber(
+                req.getSystemTraceAuditNumber() != null ? req.getSystemTraceAuditNumber() : req.getField(11));
+        copyEchoFields(req, resp);
+        echoCanonicalField(req, resp, 7);
+        echoCanonicalField(req, resp, 11);
+        echoCanonicalField(req, resp, 12);
+        echoCanonicalField(req, resp, 13);
+        echoCanonicalField(req, resp, 41);
+        return resp;
+    }
+
     private void copyEchoFields(SwitchMessage req, SwitchMessage resp) {
         for (int de : new int[]{2, 3, 4, 7, 11, 12, 13, 37, 41, 49}) {
-            if (req.getField(de) != null) {
-                resp.setField(de, req.getField(de));
+            echoCanonicalField(req, resp, de);
+        }
+    }
+
+    private void echoCanonicalField(SwitchMessage req, SwitchMessage resp, int de) {
+        String value = req.getField(de);
+        if (value == null) {
+            switch (de) {
+                case 2:
+                    value = req.getPan();
+                    break;
+                case 3:
+                    value = req.getProcessingCode() != null ? req.getProcessingCode().getCode() : null;
+                    break;
+                case 4:
+                    value = req.getTransactionAmount() > 0
+                            ? String.format("%012d", req.getTransactionAmount())
+                            : null;
+                    break;
+                case 11:
+                    value = req.getSystemTraceAuditNumber();
+                    break;
+                case 37:
+                    value = req.getRetrievalReferenceNumber();
+                    break;
+                case 39:
+                    value = req.getResponseCode() != null ? req.getResponseCode().getCode() : null;
+                    break;
+                case 49:
+                    value = req.getCurrencyCode();
+                    break;
+                default:
+                    break;
             }
+        }
+
+        if (value != null) {
+            resp.setField(de, value);
         }
     }
 
