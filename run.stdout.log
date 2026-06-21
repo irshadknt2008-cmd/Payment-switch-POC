@@ -1,0 +1,218 @@
+2026-06-07 20:52:50.083 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 20:52:50.087 [main] INFO  c.p.bootstrap.SwitchApplication -   Payment Switch – Starting Up
+2026-06-07 20:52:50.088 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 20:52:50.091 [main] INFO  c.p.bootstrap.SwitchContext - Loaded configuration from switch.properties
+2026-06-07 20:52:50.092 [main] INFO  c.p.bootstrap.SwitchContext - [1/6] Initialising persistence...
+2026-06-07 20:52:50.097 [main] INFO  c.p.p.config.DataSourceConfig - DataSource configured: localhost:5432/payment_switch pool=10
+2026-06-07 20:52:50.108 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Starting...
+2026-06-07 20:52:50.576 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Start completed.
+2026-06-07 20:52:50.578 [main] INFO  c.p.p.config.FlywayMigrator - Running Flyway database migrations...
+2026-06-07 20:52:50.779 [main] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.5.13 by Redgate
+2026-06-07 20:52:50.780 [main] INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
+2026-06-07 20:52:50.781 [main] INFO  o.f.c.i.license.VersionPrinter - 
+2026-06-07 20:52:50.860 [main] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:postgresql://localhost:5432/payment_switch (PostgreSQL 18.1)
+2026-06-07 20:52:50.883 [main] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: PostgreSQL 18.1 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 14.
+2026-06-07 20:52:50.966 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.055s)
+2026-06-07 20:52:50.983 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 2
+2026-06-07 20:52:50.990 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-06-07 20:52:51.042 [main] INFO  c.p.p.config.FlywayMigrator - Flyway migration complete. 0 migration(s) applied.
+2026-06-07 20:52:51.385 [main] INFO  c.p.bootstrap.SwitchContext - [2/6] Building ISO 8583 codecs...
+2026-06-07 20:52:51.555 [main] INFO  c.paymentswitch.iso8583.Iso8583Codec - ISO 8583 codec ready (ASCII hex bitmap, universal parse guide DE 2–128)
+2026-06-07 20:52:51.616 [main] INFO  c.paymentswitch.iso8583.Iso8583Codec - ISO 8583 codec ready (binary bitmap, universal parse guide DE 2–128)
+2026-06-07 20:52:51.632 [main] INFO  c.p.bootstrap.SwitchContext - [3/6] Building routing service...
+2026-06-07 20:52:51.635 [main] INFO  c.p.r.i.InMemoryBinTableRepository - Loaded 3 default BIN table entries
+2026-06-07 20:52:51.648 [main] INFO  c.p.bootstrap.SwitchContext - [4/6] Connecting issuer client pool...
+2026-06-07 20:52:53.031 [main] INFO  c.p.issuer.IssuerConnection - Connected to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-07 20:52:53.038 [main] INFO  c.p.issuer.IssuerClientPool - Connected to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} (1/1)
+2026-06-07 20:52:53.056 [main] INFO  c.p.issuer.IssuerClientPool - Pool for issuer 9009 ready with 1 active connection(s)
+2026-06-07 20:52:53.058 [main] INFO  c.p.bootstrap.SwitchContext - Registered issuer 9009 at 127.0.0.1:9009
+2026-06-07 20:52:53.093 [main] INFO  c.p.bootstrap.SwitchContext - [5/6] Starting acquirer server...
+2026-06-07 20:52:53.126 [main] INFO  c.p.acquirer.AcquirerServer - AcquirerServer listening on port 9998
+2026-06-07 20:52:53.141 [main] INFO  c.p.bootstrap.SwitchContext - [6/6] Switch fully initialised and ready.
+2026-06-07 20:52:53.154 [main] INFO  c.p.bootstrap.SwitchContext -   Acquirer listening on port 9998
+2026-06-07 20:52:53.169 [main] INFO  c.p.bootstrap.SwitchContext -   Default issuer: 9009 (auto-reconnect every 15s if down)
+2026-06-07 20:52:53.171 [main] INFO  c.p.bootstrap.SwitchApplication - Payment Switch is running. Press Ctrl+C to stop.
+2026-06-07 20:53:39.832 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:57572
+2026-06-07 20:54:15.516 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 247 bytes from /127.0.0.1:57572
+2026-06-07 20:54:15.521 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (247 bytes) using ASCII factory: Insufficient data for LLLVAR field 62, pos 190 len 5796
+2026-06-07 20:54:15.532 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:57572: type=AUTHORIZATION_REQUEST stan=000619 passthrough=true
+2026-06-07 20:54:15.534 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Received from acquirer /127.0.0.1:57572: type=AUTHORIZATION_REQUEST stan=000619 pan=987650******6084
+2026-06-07 20:54:15.535 [nioEventLoopGroup-4-1] DEBUG c.p.routing.impl.BinRoutingService - Routing message d63b9fcf-31ad-4271-9596-c920417a3989 using BIN 987650
+2026-06-07 20:54:15.536 [nioEventLoopGroup-4-1] INFO  c.p.routing.impl.BinRoutingService - Routed message d63b9fcf-31ad-4271-9596-c920417a3989 BIN=987650 -> issuer=9009
+2026-06-07 20:54:15.537 [nioEventLoopGroup-4-1] INFO  c.p.issuer.IssuerClientPool - Dispatching STAN 000619 to issuer 9009 via IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-07 20:54:15.544 [nioEventLoopGroup-4-1] INFO  c.p.issuer.IssuerConnection - Sending to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}:
+Sim:                   MessageType: 0100
+Sim:                   Bitmap: 723C46D128E0B000 [2,3,4,7,11,12,13,14,18,22,23,25,26,28,32,35,37,41,42,43,49,51,52]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 010000
+Sim:                   F04_AmountTransaction: 000000005000
+Sim:                   F07_TransmissionDateTime: 0607205415
+Sim:                   F11_SystemTraceAuditNumber: 000619
+Sim:                   F12_DateTimeLocalTransaction: 020607
+Sim:                   F13_DateLocalTxn: 0607
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F25_Field25: 00
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F28_Field28: 000000000
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 541544700000
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F43_Field43: contact@neaPay.com\Almere-Amsterdam\Neth
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+Sim:                   F52_Field52: [B@10b9fa68
+2026-06-07 20:54:15.548 [nioEventLoopGroup-2-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=d63b9fcf-31ad-4271-9596-c920417a3989, type=AUTHORIZATION_REQUEST, direction=INBOUND, pan=987650******6084, amount=5000, currency=566, rrn=541544700000} (247 bytes)
+2026-06-07 20:54:15.551 [nioEventLoopGroup-2-1] DEBUG c.p.issuer.IssuerConnection - Queued STAN 000619 for issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-07 20:54:16.214 [nioEventLoopGroup-2-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 188 bytes from /127.0.0.1:9009
+2026-06-07 20:54:16.216 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 5: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.216 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 15: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.217 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 20: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.218 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 21: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.219 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 27: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.219 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 28: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.220 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 30: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.221 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 31: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.222 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 34: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.223 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 36: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.225 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 59: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.226 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 60: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.227 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 66: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.228 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 67: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.229 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 73: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.229 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 78: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.230 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 88: unspecified in parsing guide for type 110
+2026-06-07 20:54:16.231 [nioEventLoopGroup-2-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (188 bytes) using ASCII factory: ISO8583 MessageFactory cannot parse fields
+2026-06-07 20:54:16.235 [nioEventLoopGroup-2-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.2026-06-07 20:56:11.606 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 21:01:11.621 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 21:06:11.636 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 21:11:11.641 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 21:16:11.642 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 21:21:11.644 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 21:26:11.652 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 21:31:11.660 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 21:36:11.661 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 21:41:11.666 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 21:46:11.674 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 21:51:11.680 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 21:56:11.687 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 22:01:11.690 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-08 00:41:13.113 [SwitchPool housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - SwitchPool - Thread starvation or clock leap detected (housekeeper delta=2h37m17s221ms822µs).
+2026-06-08 00:42:58.647 [nioEventLoopGroup-2-7] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-08 00:42:58.696 [nioEventLoopGroup-2-7] ERROR c.p.i.handler.IssuerResponseHandler - Error on issuer channel /127.0.0.1:9009: ch/qos/logback/core/status/ErrorStatus
+java.lang.NoClassDefFoundError: ch/qos/logback/core/status/ErrorStatus
+	at ch.qos.logback.core.spi.ContextAwareBase.addError(ContextAwareBase.java:105)
+	at ch.qos.logback.core.UnsynchronizedAppenderBase.doAppend(UnsynchronizedAppenderBase.java:88)
+	at ch.qos.logback.core.spi.AppenderAttachableImpl.appendLoopOnAppenders(AppenderAttachableImpl.java:51)
+	at ch.qos.logback.classic.Logger.appendLoopOnAppenders(Logger.java:270)
+	at ch.qos.logback.classic.Logger.callAppenders(Logger.java:257)
+	at ch.qos.logback.classic.Logger.buildLoggingEventAndAppend(Logger.java:421)
+	at ch.qos.logback.classic.Logger.filterAndLog_1(Logger.java:398)
+	at ch.qos.logback.classic.Logger.debug(Logger.java:486)
+	at com.paymentswitch.issuer.handler.IssuerResponseHandler.userEventTriggered(IssuerResponseHandler.java:55)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:398)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:376)
+	at io.netty.channel.AbstractChannelHandlerContext.fireUserEventTriggered(AbstractChannelHandlerContext.java:368)
+	at io.netty.channel.ChannelInboundHandlerAdapter.userEventTriggered(ChannelInboundHandlerAdapter.java:117)
+	at io.netty.handler.codec.ByteToMessageDecoder.userEventTriggered(ByteToMessageDecoder.java:388)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:398)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:376)
+	at io.netty.channel.AbstractChannelHandlerContext.fireUserEventTriggered(AbstractChannelHandlerContext.java:368)
+	at io.netty.handler.timeout.IdleStateHandler.channelIdle(IdleStateHandler.java:395)
+	at io.netty.handler.timeout.IdleStateHandler$ReaderIdleTimeoutTask.run(IdleStateHandler.java:525)
+	at io.netty.handler.timeout.IdleStateHandler$AbstractIdleTask.run(IdleStateHandler.java:497)
+	at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
+	at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:153)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:469)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.ClassNotFoundException: ch.qos.logback.core.status.ErrorStatus
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:387)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:371)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
+	... 30 common frames omitted
+2026-06-08 00:42:58.754 [nioEventLoopGroup-2-7] WARN  i.n.c.AbstractChannelHandlerContext - An exception 'java.lang.NoClassDefFoundError: ch/qos/logback/core/status/ErrorStatus' [enable DEBUG level for full stacktrace] was thrown by a user handler's exceptionCaught() method while handling the following exception:
+java.lang.NoClassDefFoundError: ch/qos/logback/core/status/ErrorStatus
+	at ch.qos.logback.core.spi.ContextAwareBase.addError(ContextAwareBase.java:105)
+	at ch.qos.logback.core.UnsynchronizedAppenderBase.doAppend(UnsynchronizedAppenderBase.java:88)
+	at ch.qos.logback.core.spi.AppenderAttachableImpl.appendLoopOnAppenders(AppenderAttachableImpl.java:51)
+	at ch.qos.logback.classic.Logger.appendLoopOnAppenders(Logger.java:270)
+	at ch.qos.logback.classic.Logger.callAppenders(Logger.java:257)
+	at ch.qos.logback.classic.Logger.buildLoggingEventAndAppend(Logger.java:421)
+	at ch.qos.logback.classic.Logger.filterAndLog_1(Logger.java:398)
+	at ch.qos.logback.classic.Logger.debug(Logger.java:486)
+	at com.paymentswitch.issuer.handler.IssuerResponseHandler.userEventTriggered(IssuerResponseHandler.java:55)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:398)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:376)
+	at io.netty.channel.AbstractChannelHandlerContext.fireUserEventTriggered(AbstractChannelHandlerContext.java:368)
+	at io.netty.channel.ChannelInboundHandlerAdapter.userEventTriggered(ChannelInboundHandlerAdapter.java:117)
+	at io.netty.handler.codec.ByteToMessageDecoder.userEventTriggered(ByteToMessageDecoder.java:388)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:398)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:376)
+	at io.netty.channel.AbstractChannelHandlerContext.fireUserEventTriggered(AbstractChannelHandlerContext.java:368)
+	at io.netty.handler.timeout.IdleStateHandler.channelIdle(IdleStateHandler.java:395)
+	at io.netty.handler.timeout.IdleStateHandler$ReaderIdleTimeoutTask.run(IdleStateHandler.java:525)
+	at io.netty.handler.timeout.IdleStateHandler$AbstractIdleTask.run(IdleStateHandler.java:497)
+	at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
+	at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:153)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:469)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.ClassNotFoundException: ch.qos.logback.core.status.ErrorStatus
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:387)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:371)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
+	... 30 common frames omitted
+2026-06-08 00:42:58.761 [nioEventLoopGroup-2-7] ERROR c.p.i.handler.IssuerResponseHandler - Error on issuer channel /127.0.0.1:9009: ch/qos/logback/core/status/ErrorStatus
+java.lang.NoClassDefFoundError: ch/qos/logback/core/status/ErrorStatus
+	at ch.qos.logback.core.spi.ContextAwareBase.addError(ContextAwareBase.java:105)
+	at ch.qos.logback.core.UnsynchronizedAppenderBase.doAppend(UnsynchronizedAppenderBase.java:88)
+	at ch.qos.logback.core.spi.AppenderAttachableImpl.appendLoopOnAppenders(AppenderAttachableImpl.java:51)
+	at ch.qos.logback.classic.Logger.appendLoopOnAppenders(Logger.java:270)
+	at ch.qos.logback.classic.Logger.callAppenders(Logger.java:257)
+	at ch.qos.logback.classic.Logger.buildLoggingEventAndAppend(Logger.java:421)
+	at ch.qos.logback.classic.Logger.filterAndLog_0_Or3Plus(Logger.java:383)
+	at ch.qos.logback.classic.Logger.log(Logger.java:765)
+	at io.netty.util.internal.logging.LocationAwareSlf4JLogger.log(LocationAwareSlf4JLogger.java:50)
+	at io.netty.util.internal.logging.LocationAwareSlf4JLogger.warn(LocationAwareSlf4JLogger.java:202)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeExceptionCaught(AbstractChannelHandlerContext.java:355)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:403)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:376)
+	at io.netty.channel.AbstractChannelHandlerContext.fireUserEventTriggered(AbstractChannelHandlerContext.java:368)
+	at io.netty.channel.ChannelInboundHandlerAdapter.userEventTriggered(ChannelInboundHandlerAdapter.java:117)
+	at io.netty.handler.codec.ByteToMessageDecoder.userEventTriggered(ByteToMessageDecoder.java:388)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:398)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:376)
+	at io.netty.channel.AbstractChannelHandlerContext.fireUserEventTriggered(AbstractChannelHandlerContext.java:368)
+	at io.netty.handler.timeout.IdleStateHandler.channelIdle(IdleStateHandler.java:395)
+	at io.netty.handler.timeout.IdleStateHandler$ReaderIdleTimeoutTask.run(IdleStateHandler.java:525)
+	at io.netty.handler.timeout.IdleStateHandler$AbstractIdleTask.run(IdleStateHandler.java:497)
+	at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
+	at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:153)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:469)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:750)
+2026-06-08 00:42:58.786 [nioEventLoopGroup-2-7] WARN  c.p.i.handler.IssuerResponseHandler - Issuer connection dropped: /127.0.0.1:9009
+2026-06-08 00:43:06.118 [issuer-reconnect] INFO  c.p.issuer.IssuerConnection - Connected to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-08 00:43:06.120 [issuer-reconnect] INFO  c.p.issuer.IssuerClientPool - Background reconnect: restored IssuerEndpoint{9009 @ 127.0.0.1:9009}

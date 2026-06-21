@@ -1,0 +1,111 @@
+2026-06-07 18:18:46.834 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 18:18:47.850 [main] INFO  c.p.bootstrap.SwitchApplication -   Payment Switch – Starting Up
+2026-06-07 18:18:47.851 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-07 18:18:47.854 [main] INFO  c.p.bootstrap.SwitchContext - Loaded configuration from switch.properties
+2026-06-07 18:18:47.856 [main] INFO  c.p.bootstrap.SwitchContext - [1/6] Initialising persistence...
+2026-06-07 18:18:47.860 [main] INFO  c.p.p.config.DataSourceConfig - DataSource configured: localhost:5432/payment_switch pool=10
+2026-06-07 18:18:47.868 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Starting...
+2026-06-07 18:18:48.245 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Start completed.
+2026-06-07 18:18:48.246 [main] INFO  c.p.p.config.FlywayMigrator - Running Flyway database migrations...
+2026-06-07 18:18:48.357 [main] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.5.13 by Redgate
+2026-06-07 18:18:48.364 [main] INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
+2026-06-07 18:18:48.365 [main] INFO  o.f.c.i.license.VersionPrinter - 
+2026-06-07 18:18:48.452 [main] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:postgresql://localhost:5432/payment_switch (PostgreSQL 18.1)
+2026-06-07 18:18:48.472 [main] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: PostgreSQL 18.1 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 14.
+2026-06-07 18:18:48.543 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.041s)
+2026-06-07 18:18:48.558 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 2
+2026-06-07 18:18:48.564 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-06-07 18:18:48.597 [main] INFO  c.p.p.config.FlywayMigrator - Flyway migration complete. 0 migration(s) applied.
+2026-06-07 18:18:48.799 [main] INFO  c.p.bootstrap.SwitchContext - [2/6] Building ISO 8583 codecs...
+2026-06-07 18:18:48.894 [main] INFO  c.paymentswitch.iso8583.Iso8583Codec - ISO 8583 codec ready (ASCII hex bitmap, universal parse guide DE 2–128)
+2026-06-07 18:18:48.897 [main] INFO  c.p.bootstrap.SwitchContext - [3/6] Building routing service...
+2026-06-07 18:18:48.899 [main] INFO  c.p.r.i.InMemoryBinTableRepository - Loaded 3 default BIN table entries
+2026-06-07 18:18:48.900 [main] INFO  c.p.bootstrap.SwitchContext - [4/6] Connecting issuer client pool...
+2026-06-07 18:18:50.083 [main] INFO  c.p.issuer.IssuerConnection - Connected to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-07 18:18:50.085 [main] INFO  c.p.issuer.IssuerClientPool - Connected to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} (1/1)
+2026-06-07 18:18:50.102 [main] INFO  c.p.issuer.IssuerClientPool - Pool for issuer 9009 ready with 1 active connection(s)
+2026-06-07 18:18:50.116 [main] INFO  c.p.bootstrap.SwitchContext - Registered issuer 9009 at 127.0.0.1:9009
+2026-06-07 18:18:50.119 [main] INFO  c.p.bootstrap.SwitchContext - [5/6] Starting acquirer server...
+2026-06-07 18:18:50.182 [main] INFO  c.p.acquirer.AcquirerServer - AcquirerServer listening on port 9998
+2026-06-07 18:18:50.202 [main] INFO  c.p.bootstrap.SwitchContext - [6/6] Switch fully initialised and ready.
+2026-06-07 18:18:50.209 [main] INFO  c.p.bootstrap.SwitchContext -   Acquirer listening on port 9998
+2026-06-07 18:18:50.210 [main] INFO  c.p.bootstrap.SwitchContext -   Default issuer: 9009 (auto-reconnect every 15s if down)
+2026-06-07 18:18:50.214 [main] INFO  c.p.bootstrap.SwitchApplication - Payment Switch is running. Press Ctrl+C to stop.
+2026-06-07 18:19:14.738 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:62718
+2026-06-07 18:22:29.536 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 247 bytes from /127.0.0.1:62718
+2026-06-07 18:22:29.544 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (247 bytes), using routing extractor: Insufficient data for LLLVAR field 62, pos 190 len 5796
+2026-06-07 18:22:29.546 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:62718: type=AUTHORIZATION_REQUEST stan=null passthrough=true
+2026-06-07 18:22:29.548 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Received from acquirer /127.0.0.1:62718: type=AUTHORIZATION_REQUEST stan=null pan=****
+2026-06-07 18:22:29.549 [nioEventLoopGroup-4-1] DEBUG c.p.a.handler.AcquirerMessageHandler - No PAN – routing stan=null to default issuer 9009
+2026-06-07 18:22:29.554 [nioEventLoopGroup-4-1] ERROR c.p.a.handler.AcquirerMessageHandler - Issuer forwarding failed for stan=null: Request missing STAN (DE 11)
+2026-06-07 18:22:29.557 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageAssembler - Assembled 22 bytes for SwitchMessage{id=22b3260e-7927-4e68-b728-9be274ceead6, type=AUTHORIZATION_RESPONSE, direction=OUTBOUND, pan=****, amount=0, currency=null, rrn=null}
+2026-06-07 18:22:29.557 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=22b3260e-7927-4e68-b728-9be274ceead6, type=AUTHORIZATION_RESPONSE, direction=OUTBOUND, pan=****, amount=0, currency=null, rrn=null} (22 bytes)
+2026-06-07 18:22:29.559 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Sent to acquirer /127.0.0.1:62718: type=AUTHORIZATION_RESPONSE stan=null rc=ISSUER_UNAVAILABLE
+2026-06-07 18:23:50.098 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 18:27:29.567 [nioEventLoopGroup-4-1] WARN  c.p.a.handler.AcquirerMessageHandler - Reader idle on /127.0.0.1:62718, closing
+2026-06-07 18:27:29.570 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:62718
+2026-06-07 18:28:14.850 [nioEventLoopGroup-4-2] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:62975
+2026-06-07 18:28:50.097 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 18:33:14.863 [nioEventLoopGroup-4-2] WARN  c.p.a.handler.AcquirerMessageHandler - Reader idle on /127.0.0.1:62975, closing
+2026-06-07 18:33:15.172 [nioEventLoopGroup-4-2] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:62975
+2026-06-07 18:33:50.099 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 18:34:14.886 [nioEventLoopGroup-4-3] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63300
+2026-06-07 18:38:50.106 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 18:39:14.893 [nioEventLoopGroup-4-3] WARN  c.p.a.handler.AcquirerMessageHandler - Reader idle on /127.0.0.1:63300, closing
+2026-06-07 18:39:14.895 [nioEventLoopGroup-4-3] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:63300
+2026-06-07 18:40:14.927 [nioEventLoopGroup-4-4] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63462
+2026-06-07 18:43:50.114 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 18:45:14.936 [nioEventLoopGroup-4-4] WARN  c.p.a.handler.AcquirerMessageHandler - Reader idle on /127.0.0.1:63462, closing
+2026-06-07 18:45:14.937 [nioEventLoopGroup-4-4] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:63462
+2026-06-07 18:45:15.041 [nioEventLoopGroup-4-5] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:63854
+2026-06-07 18:48:50.119 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 18:50:15.046 [nioEventLoopGroup-4-5] WARN  c.p.a.handler.AcquirerMessageHandler - Reader idle on /127.0.0.1:63854, closing
+2026-06-07 18:50:15.370 [nioEventLoopGroup-4-5] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:63854
+2026-06-07 18:51:15.184 [nioEventLoopGroup-4-6] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:64297
+2026-06-07 18:53:50.122 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 18:56:15.200 [nioEventLoopGroup-4-6] WARN  c.p.a.handler.AcquirerMessageHandler - Reader idle on /127.0.0.1:64297, closing
+2026-06-07 18:56:15.496 [nioEventLoopGroup-4-6] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:64297
+2026-06-07 18:57:15.203 [nioEventLoopGroup-4-7] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:64710
+2026-06-07 18:58:50.127 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 19:02:15.209 [nioEventLoopGroup-4-7] WARN  c.p.a.handler.AcquirerMessageHandler - Reader idle on /127.0.0.1:64710, closing
+2026-06-07 19:02:15.522 [nioEventLoopGroup-4-7] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:64710
+2026-06-07 19:03:15.317 [nioEventLoopGroup-4-8] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:65159
+2026-06-07 19:03:50.145 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 19:08:15.317 [nioEventLoopGroup-4-8] WARN  c.p.a.handler.AcquirerMessageHandler - Reader idle on /127.0.0.1:65159, closing
+2026-06-07 19:08:15.321 [nioEventLoopGroup-4-8] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:65159
+2026-06-07 19:08:15.459 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:65479
+2026-06-07 19:08:50.150 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 19:13:15.461 [nioEventLoopGroup-4-1] WARN  c.p.a.handler.AcquirerMessageHandler - Reader idle on /127.0.0.1:65479, closing
+2026-06-07 19:13:15.774 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:65479
+2026-06-07 19:13:50.158 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 19:14:15.646 [nioEventLoopGroup-4-2] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:49565
+2026-06-07 19:18:50.167 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-07 19:19:15.661 [nioEventLoopGroup-4-2] WARN  c.p.a.handler.AcquirerMessageHandler - Reader idle on /127.0.0.1:49565, closing
+2026-06-07 19:19:15.664 [nioEventLoopGroup-4-2] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:49565
+2026-06-07 19:19:15.805 [nioEventLoopGroup-4-3] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:50473
+2026-06-07 19:21:24.700 [nioEventLoopGroup-4-3] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:50473
+2026-06-07 19:21:43.604 [nioEventLoopGroup-4-4] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:50683
+2026-06-07 19:21:51.253 [nioEventLoopGroup-4-4] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 63 bytes from /127.0.0.1:50683
+2026-06-07 19:21:51.275 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 49: unspecified in parsing guide for type 800
+2026-06-07 19:21:51.276 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 55: unspecified in parsing guide for type 800
+2026-06-07 19:21:51.277 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 62: unspecified in parsing guide for type 800
+2026-06-07 19:21:51.278 [nioEventLoopGroup-4-4] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 68: unspecified in parsing guide for type 800
+2026-06-07 19:21:51.280 [nioEventLoopGroup-4-4] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (63 bytes), using routing extractor: ISO8583 MessageFactory cannot parse fields
+2026-06-07 19:21:51.307 [nioEventLoopGroup-4-4] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:50683: type=NETWORK_MANAGEMENT_REQUEST stan=null passthrough=true
+2026-06-07 19:21:51.309 [nioEventLoopGroup-4-4] INFO  c.p.a.handler.AcquirerMessageHandler - Received from acquirer /127.0.0.1:50683: type=NETWORK_MANAGEMENT_REQUEST stan=null pan=****
+2026-06-07 19:21:51.309 [nioEventLoopGroup-4-4] DEBUG c.p.a.handler.AcquirerMessageHandler - No PAN – routing stan=null to default issuer 9009
+2026-06-07 19:21:51.314 [nioEventLoopGroup-4-4] ERROR c.p.a.handler.AcquirerMessageHandler - Issuer forwarding failed for stan=null: Request missing STAN (DE 11)
+2026-06-07 19:21:51.324 [nioEventLoopGroup-4-4] DEBUG c.p.iso8583.IsoMessageAssembler - Assembled 22 bytes for SwitchMessage{id=097b4e38-abcb-4d01-acfe-b3f5eb8d52f6, type=NETWORK_MANAGEMENT_RESPONSE, direction=OUTBOUND, pan=****, amount=0, currency=null, rrn=null}
+2026-06-07 19:21:51.326 [nioEventLoopGroup-4-4] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=097b4e38-abcb-4d01-acfe-b3f5eb8d52f6, type=NETWORK_MANAGEMENT_RESPONSE, direction=OUTBOUND, pan=****, amount=0, currency=null, rrn=null} (22 bytes)
+2026-06-07 19:21:51.328 [nioEventLoopGroup-4-4] INFO  c.p.a.handler.AcquirerMessageHandler - Sent to acquirer /127.0.0.1:50683: type=NETWORK_MANAGEMENT_RESPONSE stan=null rc=ISSUER_UNAVAILABLE
+2026-06-07 19:21:59.581 [nioEventLoopGroup-4-4] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 247 bytes from /127.0.0.1:50683
+2026-06-07 19:21:59.589 [nioEventLoopGroup-4-4] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (247 bytes), using routing extractor: Insufficient data for LLLVAR field 62, pos 190 len 5796
+2026-06-07 19:21:59.591 [nioEventLoopGroup-4-4] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:50683: type=AUTHORIZATION_REQUEST stan=null passthrough=true
+2026-06-07 19:21:59.592 [nioEventLoopGroup-4-4] INFO  c.p.a.handler.AcquirerMessageHandler - Received from acquirer /127.0.0.1:50683: type=AUTHORIZATION_REQUEST stan=null pan=****
+2026-06-07 19:21:59.593 [nioEventLoopGroup-4-4] DEBUG c.p.a.handler.AcquirerMessageHandler - No PAN – routing stan=null to default issuer 9009
+2026-06-07 19:21:59.594 [nioEventLoopGroup-4-4] ERROR c.p.a.handler.AcquirerMessageHandler - Issuer forwarding failed for stan=null: Request missing STAN (DE 11)
+2026-06-07 19:21:59.595 [nioEventLoopGroup-4-4] DEBUG c.p.iso8583.IsoMessageAssembler - Assembled 22 bytes for SwitchMessage{id=d2cc3ec4-4770-4d3a-8bdb-622a607d6ff4, type=AUTHORIZATION_RESPONSE, direction=OUTBOUND, pan=****, amount=0, currency=null, rrn=null}
+2026-06-07 19:21:59.596 [nioEventLoopGroup-4-4] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=d2cc3ec4-4770-4d3a-8bdb-622a607d6ff4, type=AUTHORIZATION_RESPONSE, direction=OUTBOUND, pan=****, amount=0, currency=null, rrn=null} (22 bytes)
+2026-06-07 19:21:59.598 [nioEventLoopGroup-4-4] INFO  c.p.a.handler.AcquirerMessageHandler - Sent to acquirer /127.0.0.1:50683: type=AUTHORIZATION_RESPONSE stan=null rc=ISSUER_UNAVAILABLE
+2026-06-07 19:22:15.831 [nioEventLoopGroup-4-5] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:50727
+2026-06-07 19:23:50.175 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)

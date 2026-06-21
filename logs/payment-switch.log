@@ -1,0 +1,719 @@
+2026-06-21 10:03:29.005 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-21 10:03:29.019 [main] INFO  c.p.bootstrap.SwitchApplication -   Payment Switch – Starting Up
+2026-06-21 10:03:29.020 [main] INFO  c.p.bootstrap.SwitchApplication - =================================================
+2026-06-21 10:03:29.231 [main] INFO  c.p.bootstrap.SwitchContext - Loaded configuration from switch.properties
+2026-06-21 10:03:29.235 [main] INFO  c.p.bootstrap.SwitchContext - [1/6] Initialising persistence...
+2026-06-21 10:03:29.284 [main] INFO  c.p.p.config.DataSourceConfig - DataSource configured: localhost:5432/payment_switch pool=10
+2026-06-21 10:03:29.484 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Starting...
+2026-06-21 10:03:30.051 [main] INFO  com.zaxxer.hikari.HikariDataSource - SwitchPool - Start completed.
+2026-06-21 10:03:30.078 [main] INFO  c.p.p.config.FlywayMigrator - Running Flyway database migrations...
+2026-06-21 10:03:30.215 [main] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.5.13 by Redgate
+2026-06-21 10:03:30.216 [main] INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.13
+2026-06-21 10:03:30.216 [main] INFO  o.f.c.i.license.VersionPrinter - 
+2026-06-21 10:03:30.350 [main] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:postgresql://localhost:5432/payment_switch (PostgreSQL 18.1)
+2026-06-21 10:03:30.375 [main] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: PostgreSQL 18.1 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 14.
+2026-06-21 10:03:30.633 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.205s)
+2026-06-21 10:03:30.658 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 2
+2026-06-21 10:03:30.661 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-06-21 10:03:30.700 [main] INFO  c.p.p.config.FlywayMigrator - Flyway migration complete. 0 migration(s) applied.
+2026-06-21 10:03:31.235 [main] INFO  c.p.bootstrap.SwitchContext - [2/6] Building ISO 8583 codecs...
+2026-06-21 10:03:31.415 [main] INFO  c.paymentswitch.iso8583.Iso8583Codec - ISO 8583 codec ready (ASCII hex bitmap, universal parse guide DE 2–128)
+2026-06-21 10:03:31.485 [main] INFO  c.paymentswitch.iso8583.Iso8583Codec - ISO 8583 codec ready (binary bitmap, universal parse guide DE 2–128)
+2026-06-21 10:03:31.515 [main] INFO  c.p.bootstrap.SwitchContext - [3/6] Building routing service...
+2026-06-21 10:03:31.540 [main] INFO  c.p.r.i.InMemoryBinTableRepository - Loaded 3 default BIN table entries
+2026-06-21 10:03:31.566 [main] INFO  c.p.bootstrap.SwitchContext - [4/6] Connecting issuer client pool...
+2026-06-21 10:03:32.560 [main] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:03:32.560 [main] INFO  c.p.issuer.IssuerClientPool - Pool for issuer 9009 ready with 0 active connection(s)
+2026-06-21 10:03:32.560 [main] INFO  c.p.bootstrap.SwitchContext - Registered issuer 9009 at 127.0.0.1:9009
+2026-06-21 10:03:32.561 [main] INFO  c.p.bootstrap.SwitchContext - [5/6] Starting acquirer server...
+2026-06-21 10:03:32.702 [main] INFO  c.p.acquirer.AcquirerServer - AcquirerServer listening on port 9998
+2026-06-21 10:03:32.703 [main] INFO  c.p.bootstrap.SwitchContext - [6/6] Switch fully initialised and ready.
+2026-06-21 10:03:32.703 [main] INFO  c.p.bootstrap.SwitchContext -   Acquirer listening on port 9998
+2026-06-21 10:03:32.703 [main] INFO  c.p.bootstrap.SwitchContext -   Default issuer: 9009 (auto-reconnect every 15s if down)
+2026-06-21 10:03:32.705 [main] INFO  c.p.bootstrap.SwitchApplication - Payment Switch is running. Press Ctrl+C to stop.
+2026-06-21 10:03:42.114 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:03:57.120 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:04:12.124 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:04:27.129 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:04:42.134 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:04:57.139 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:05:12.144 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:05:27.148 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:05:42.158 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:05:57.161 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:06:12.164 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:06:27.167 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:06:42.188 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:06:45.792 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:50350
+2026-06-21 10:06:57.192 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:07:12.324 [issuer-reconnect] DEBUG c.p.issuer.IssuerClientPool - Issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} not reachable: Failed to connect to IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:07:27.329 [issuer-reconnect] INFO  c.p.issuer.IssuerConnection - Connected to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:07:27.330 [issuer-reconnect] INFO  c.p.issuer.IssuerClientPool - Connected to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009} (1/1)
+2026-06-21 10:07:27.330 [issuer-reconnect] INFO  c.p.issuer.IssuerClientPool - Background reconnect: issuer 9009 now has 1 connection
+2026-06-21 10:07:33.755 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 63 bytes from /127.0.0.1:50350
+2026-06-21 10:07:33.814 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 39: unspecified in parsing guide for type 800
+2026-06-21 10:07:33.815 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 58: unspecified in parsing guide for type 800
+2026-06-21 10:07:33.816 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (63 bytes) using ASCII factory: ISO8583 MessageFactory cannot parse fields
+2026-06-21 10:07:33.843 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:50350: type=NETWORK_MANAGEMENT_REQUEST stan=000620 passthrough=true
+2026-06-21 10:07:33.855 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Received from acquirer /127.0.0.1:50350: type=NETWORK_MANAGEMENT_REQUEST stan=000620 pan=****
+2026-06-21 10:07:33.858 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageAssembler - Assembled 62 bytes for SwitchMessage{id=5bc456d7-9f13-4526-a20b-f2a1ae952e98, type=NETWORK_MANAGEMENT_RESPONSE, direction=OUTBOUND, pan=****, amount=0, currency=null, rrn=null}
+2026-06-21 10:07:33.858 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=5bc456d7-9f13-4526-a20b-f2a1ae952e98, type=NETWORK_MANAGEMENT_RESPONSE, direction=OUTBOUND, pan=****, amount=0, currency=null, rrn=null} (62 bytes)
+2026-06-21 10:07:33.862 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Sent to acquirer /127.0.0.1:50350:
+Sim:                   MessageType: 0810
+Sim:                   Bitmap: 2238000002800000 [3,7,11,12,13,39,41]
+Sim:                   F03_ProcessingCode: 000000
+Sim:                   F07_TransmissionDateTime: 0621100733
+Sim:                   F11_SystemTraceAuditNumber: 000620
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+2026-06-21 10:08:03.679 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 247 bytes from /127.0.0.1:50350
+2026-06-21 10:08:03.682 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (247 bytes) using ASCII factory: Insufficient data for LLLVAR field 62, pos 190 len 5796
+2026-06-21 10:08:03.686 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:50350: type=AUTHORIZATION_REQUEST stan=000621 passthrough=true
+2026-06-21 10:08:03.687 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Received from acquirer /127.0.0.1:50350: type=AUTHORIZATION_REQUEST stan=000621 pan=987650******6084
+2026-06-21 10:08:03.780 [nioEventLoopGroup-4-1] DEBUG c.p.routing.impl.BinRoutingService - Routing message c8c72a5b-9b25-4e5e-aeb0-bacd7ec2a603 using BIN 987650
+2026-06-21 10:08:03.780 [nioEventLoopGroup-4-1] INFO  c.p.routing.impl.BinRoutingService - Routed message c8c72a5b-9b25-4e5e-aeb0-bacd7ec2a603 BIN=987650 -> issuer=9009
+2026-06-21 10:08:03.781 [nioEventLoopGroup-4-1] INFO  c.p.issuer.IssuerClientPool - Dispatching STAN 000621 to issuer 9009 via IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:08:03.785 [nioEventLoopGroup-4-1] INFO  c.p.issuer.IssuerConnection - Sending to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}:
+Sim:                   MessageType: 0100
+Sim:                   Bitmap: 723C46D128E0B000 [2,3,4,7,11,12,13,14,18,22,23,25,26,28,32,35,37,41,42,43,49,51,52]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 010000
+Sim:                   F04_AmountTransaction: 000000005000
+Sim:                   F07_TransmissionDateTime: 0621100803
+Sim:                   F11_SystemTraceAuditNumber: 000621
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F25_Field25: 00
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F28_Field28: 000000000
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 080344800000
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F43_Field43: contact@neaPay.com\Almere-Amsterdam\Neth
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+Sim:                   F52_Field52: [B@77469911
+2026-06-21 10:08:03.790 [nioEventLoopGroup-2-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=c8c72a5b-9b25-4e5e-aeb0-bacd7ec2a603, type=AUTHORIZATION_REQUEST, direction=INBOUND, pan=987650******6084, amount=5000, currency=566, rrn=080344800000} (247 bytes)
+2026-06-21 10:08:03.791 [nioEventLoopGroup-2-1] DEBUG c.p.issuer.IssuerConnection - Queued STAN 000621 for issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:08:05.731 [nioEventLoopGroup-2-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 188 bytes from /127.0.0.1:9009
+2026-06-21 10:08:05.732 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 5: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.732 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 15: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.733 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 20: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.733 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 21: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.733 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 27: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.733 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 28: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.733 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 30: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.733 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 31: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.733 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 34: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.733 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 36: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.734 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 59: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.734 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 60: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.734 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 66: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.734 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 67: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.734 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 73: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.734 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 78: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.734 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 88: unspecified in parsing guide for type 110
+2026-06-21 10:08:05.734 [nioEventLoopGroup-2-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (188 bytes) using ASCII factory: ISO8583 MessageFactory cannot parse fields
+2026-06-21 10:08:05.737 [nioEventLoopGroup-2-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:9009: type=AUTHORIZATION_RESPONSE stan=000621 passthrough=true
+2026-06-21 10:08:05.739 [nioEventLoopGroup-2-1] INFO  c.p.i.handler.IssuerResponseHandler - Received response from issuer /127.0.0.1:9009:
+Sim:                   MessageType: 0110
+Sim:                   Bitmap: 723C46412EC0A000 [2,3,4,7,11,12,13,14,18,22,23,26,32,35,37,38,39,41,42,49,51]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 010000
+Sim:                   F04_AmountTransaction: 000000005000
+Sim:                   F07_TransmissionDateTime: 0621100803
+Sim:                   F11_SystemTraceAuditNumber: 000621
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 080344800000
+Sim:                   F38_ApprovalCode: 549590
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+2026-06-21 10:08:05.741 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=fe96b4a0-59e5-492f-8fdf-f81e69e5b6ee, type=AUTHORIZATION_RESPONSE, direction=OUTBOUND, pan=987650******6084, amount=5000, currency=566, rrn=080344800000} (188 bytes)
+2026-06-21 10:08:05.743 [nioEventLoopGroup-2-1] INFO  c.p.a.handler.AcquirerMessageHandler - Sent to acquirer /127.0.0.1:50350:
+Sim:                   MessageType: 0110
+Sim:                   Bitmap: 723C46412EC0A000 [2,3,4,7,11,12,13,14,18,22,23,26,32,35,37,38,39,41,42,49,51]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 010000
+Sim:                   F04_AmountTransaction: 000000005000
+Sim:                   F07_TransmissionDateTime: 0621100803
+Sim:                   F11_SystemTraceAuditNumber: 000621
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 080344800000
+Sim:                   F38_ApprovalCode: 549590
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+2026-06-21 10:08:05.743 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Correlated issuer response for STAN 000621
+2026-06-21 10:09:36.928 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 247 bytes from /127.0.0.1:50350
+2026-06-21 10:09:36.930 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (247 bytes) using ASCII factory: Insufficient data for LLLVAR field 62, pos 190 len 5796
+2026-06-21 10:09:36.932 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:50350: type=FINANCIAL_REQUEST stan=000622 passthrough=true
+2026-06-21 10:09:36.932 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Received from acquirer /127.0.0.1:50350: type=FINANCIAL_REQUEST stan=000622 pan=987650******6084
+2026-06-21 10:09:36.932 [nioEventLoopGroup-4-1] DEBUG c.p.routing.impl.BinRoutingService - Routing message 418a829e-70d1-4306-8d82-30d01ee6f54b using BIN 987650
+2026-06-21 10:09:36.933 [nioEventLoopGroup-4-1] INFO  c.p.routing.impl.BinRoutingService - Routed message 418a829e-70d1-4306-8d82-30d01ee6f54b BIN=987650 -> issuer=9009
+2026-06-21 10:09:36.933 [nioEventLoopGroup-4-1] INFO  c.p.issuer.IssuerClientPool - Dispatching STAN 000622 to issuer 9009 via IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:09:36.934 [nioEventLoopGroup-4-1] INFO  c.p.issuer.IssuerConnection - Sending to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}:
+Sim:                   MessageType: 0200
+Sim:                   Bitmap: 723C46D128E0B000 [2,3,4,7,11,12,13,14,18,22,23,25,26,28,32,35,37,41,42,43,49,51,52]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 010000
+Sim:                   F04_AmountTransaction: 000000005000
+Sim:                   F07_TransmissionDateTime: 0621100936
+Sim:                   F11_SystemTraceAuditNumber: 000622
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F25_Field25: 00
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F28_Field28: 000000000
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 093644900000
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F43_Field43: contact@neaPay.com\Almere-Amsterdam\Neth
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+Sim:                   F52_Field52: [B@6236ca8b
+2026-06-21 10:09:36.935 [nioEventLoopGroup-2-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=418a829e-70d1-4306-8d82-30d01ee6f54b, type=FINANCIAL_REQUEST, direction=INBOUND, pan=987650******6084, amount=5000, currency=566, rrn=093644900000} (247 bytes)
+2026-06-21 10:09:36.936 [nioEventLoopGroup-2-1] DEBUG c.p.issuer.IssuerConnection - Queued STAN 000622 for issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:09:37.904 [nioEventLoopGroup-2-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 186 bytes from /127.0.0.1:9009
+2026-06-21 10:09:37.905 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 26: unspecified in parsing guide for type 210
+2026-06-21 10:09:37.905 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 27: unspecified in parsing guide for type 210
+2026-06-21 10:09:37.906 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 30: unspecified in parsing guide for type 210
+2026-06-21 10:09:37.906 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 69: unspecified in parsing guide for type 210
+2026-06-21 10:09:37.906 [nioEventLoopGroup-2-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (186 bytes) using ASCII factory: ISO8583 MessageFactory cannot parse fields
+2026-06-21 10:09:37.908 [nioEventLoopGroup-2-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:9009: type=FINANCIAL_RESPONSE stan=000622 passthrough=true
+2026-06-21 10:09:37.910 [nioEventLoopGroup-2-1] INFO  c.p.i.handler.IssuerResponseHandler - Received response from issuer /127.0.0.1:9009:
+Sim:                   MessageType: 0210
+Sim:                   Bitmap: 723C46012EC0A000 [2,3,4,7,11,12,13,14,18,22,23,32,35,37,38,39,41,42,49,51]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 010000
+Sim:                   F04_AmountTransaction: 000000005000
+Sim:                   F07_TransmissionDateTime: 0621100936
+Sim:                   F11_SystemTraceAuditNumber: 000622
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 093644900000
+Sim:                   F38_ApprovalCode: 449278
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+2026-06-21 10:09:37.911 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=261fbd67-664c-4f77-9ffd-61fa09772a90, type=FINANCIAL_RESPONSE, direction=OUTBOUND, pan=987650******6084, amount=5000, currency=566, rrn=093644900000} (186 bytes)
+2026-06-21 10:09:37.916 [nioEventLoopGroup-2-1] INFO  c.p.a.handler.AcquirerMessageHandler - Sent to acquirer /127.0.0.1:50350:
+Sim:                   MessageType: 0210
+Sim:                   Bitmap: 723C46012EC0A000 [2,3,4,7,11,12,13,14,18,22,23,32,35,37,38,39,41,42,49,51]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 010000
+Sim:                   F04_AmountTransaction: 000000005000
+Sim:                   F07_TransmissionDateTime: 0621100936
+Sim:                   F11_SystemTraceAuditNumber: 000622
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 093644900000
+Sim:                   F38_ApprovalCode: 449278
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+2026-06-21 10:09:37.916 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Correlated issuer response for STAN 000622
+2026-06-21 10:09:54.697 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 247 bytes from /127.0.0.1:50350
+2026-06-21 10:09:54.699 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (247 bytes) using ASCII factory: Insufficient data for LLLVAR field 62, pos 190 len 5796
+2026-06-21 10:09:54.701 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:50350: type=FINANCIAL_REQUEST stan=000623 passthrough=true
+2026-06-21 10:09:54.701 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Received from acquirer /127.0.0.1:50350: type=FINANCIAL_REQUEST stan=000623 pan=987650******6084
+2026-06-21 10:09:54.701 [nioEventLoopGroup-4-1] DEBUG c.p.routing.impl.BinRoutingService - Routing message cb6c538d-c096-4c5f-b8a4-ff356f95f670 using BIN 987650
+2026-06-21 10:09:54.702 [nioEventLoopGroup-4-1] INFO  c.p.routing.impl.BinRoutingService - Routed message cb6c538d-c096-4c5f-b8a4-ff356f95f670 BIN=987650 -> issuer=9009
+2026-06-21 10:09:54.702 [nioEventLoopGroup-4-1] INFO  c.p.issuer.IssuerClientPool - Dispatching STAN 000623 to issuer 9009 via IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:09:54.704 [nioEventLoopGroup-4-1] INFO  c.p.issuer.IssuerConnection - Sending to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}:
+Sim:                   MessageType: 0200
+Sim:                   Bitmap: 723C46D128E0B000 [2,3,4,7,11,12,13,14,18,22,23,25,26,28,32,35,37,41,42,43,49,51,52]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 010000
+Sim:                   F04_AmountTransaction: 000000005000
+Sim:                   F07_TransmissionDateTime: 0621100954
+Sim:                   F11_SystemTraceAuditNumber: 000623
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F25_Field25: 00
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F28_Field28: 000000000
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 095445000000
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F43_Field43: contact@neaPay.com\Almere-Amsterdam\Neth
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+Sim:                   F52_Field52: [B@af201fe
+2026-06-21 10:09:54.705 [nioEventLoopGroup-2-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=cb6c538d-c096-4c5f-b8a4-ff356f95f670, type=FINANCIAL_REQUEST, direction=INBOUND, pan=987650******6084, amount=5000, currency=566, rrn=095445000000} (247 bytes)
+2026-06-21 10:09:54.706 [nioEventLoopGroup-2-1] DEBUG c.p.issuer.IssuerConnection - Queued STAN 000623 for issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:09:55.673 [nioEventLoopGroup-2-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 186 bytes from /127.0.0.1:9009
+2026-06-21 10:09:55.674 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 26: unspecified in parsing guide for type 210
+2026-06-21 10:09:55.674 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 27: unspecified in parsing guide for type 210
+2026-06-21 10:09:55.674 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 30: unspecified in parsing guide for type 210
+2026-06-21 10:09:55.675 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 69: unspecified in parsing guide for type 210
+2026-06-21 10:09:55.675 [nioEventLoopGroup-2-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (186 bytes) using ASCII factory: ISO8583 MessageFactory cannot parse fields
+2026-06-21 10:09:55.677 [nioEventLoopGroup-2-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:9009: type=FINANCIAL_RESPONSE stan=000623 passthrough=true
+2026-06-21 10:09:55.678 [nioEventLoopGroup-2-1] INFO  c.p.i.handler.IssuerResponseHandler - Received response from issuer /127.0.0.1:9009:
+Sim:                   MessageType: 0210
+Sim:                   Bitmap: 723C46012EC0A000 [2,3,4,7,11,12,13,14,18,22,23,32,35,37,38,39,41,42,49,51]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 010000
+Sim:                   F04_AmountTransaction: 000000005000
+Sim:                   F07_TransmissionDateTime: 0621100954
+Sim:                   F11_SystemTraceAuditNumber: 000623
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 095445000000
+Sim:                   F38_ApprovalCode: 380182
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+2026-06-21 10:09:55.679 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=210aa16f-023c-4b14-8db9-174f521a603b, type=FINANCIAL_RESPONSE, direction=OUTBOUND, pan=987650******6084, amount=5000, currency=566, rrn=095445000000} (186 bytes)
+2026-06-21 10:09:55.681 [nioEventLoopGroup-2-1] INFO  c.p.a.handler.AcquirerMessageHandler - Sent to acquirer /127.0.0.1:50350:
+Sim:                   MessageType: 0210
+Sim:                   Bitmap: 723C46012EC0A000 [2,3,4,7,11,12,13,14,18,22,23,32,35,37,38,39,41,42,49,51]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 010000
+Sim:                   F04_AmountTransaction: 000000005000
+Sim:                   F07_TransmissionDateTime: 0621100954
+Sim:                   F11_SystemTraceAuditNumber: 000623
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 095445000000
+Sim:                   F38_ApprovalCode: 380182
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+2026-06-21 10:09:55.685 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Correlated issuer response for STAN 000623
+2026-06-21 10:10:05.958 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 260 bytes from /127.0.0.1:50350
+2026-06-21 10:10:05.959 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (260 bytes) using ASCII factory: Insufficient data for LLLVAR field 63, pos 164 len 954
+2026-06-21 10:10:05.962 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:50350: type=REVERSAL_ADVICE_REQUEST stan=000624 passthrough=true
+2026-06-21 10:10:05.962 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Received from acquirer /127.0.0.1:50350: type=REVERSAL_ADVICE_REQUEST stan=000624 pan=987650******6084
+2026-06-21 10:10:05.963 [nioEventLoopGroup-4-1] DEBUG c.p.routing.impl.BinRoutingService - Routing message 97b9f837-5612-446a-9188-463e0f695b3a using BIN 987650
+2026-06-21 10:10:05.963 [nioEventLoopGroup-4-1] INFO  c.p.routing.impl.BinRoutingService - Routed message 97b9f837-5612-446a-9188-463e0f695b3a BIN=987650 -> issuer=9009
+2026-06-21 10:10:05.963 [nioEventLoopGroup-4-1] INFO  c.p.issuer.IssuerClientPool - Dispatching STAN 000624 to issuer 9009 via IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:10:05.965 [nioEventLoopGroup-4-1] INFO  c.p.issuer.IssuerConnection - Sending to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}:
+Sim:                   MessageType: 0420
+Sim:                   Bitmap: 723C46D1A8E0B000 [2,3,4,7,11,12,13,14,18,22,23,25,26,28,32,33,35,37,41,42,43,49,51,52]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 010000
+Sim:                   F04_AmountTransaction: 000000005000
+Sim:                   F07_TransmissionDateTime: 0621101005
+Sim:                   F11_SystemTraceAuditNumber: 000624
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F25_Field25: 00
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F28_Field28: 000000000
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F33_Field33: 27610000003
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 095445000000
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F43_Field43: contact@neaPay.com\Almere-Amsterdam\Neth
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+Sim:                   F52_Field52: [B@12d9be1d
+2026-06-21 10:10:05.966 [nioEventLoopGroup-2-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=97b9f837-5612-446a-9188-463e0f695b3a, type=REVERSAL_ADVICE_REQUEST, direction=INBOUND, pan=987650******6084, amount=5000, currency=566, rrn=095445000000} (260 bytes)
+2026-06-21 10:10:05.967 [nioEventLoopGroup-2-1] DEBUG c.p.issuer.IssuerConnection - Queued STAN 000624 for issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:10:06.829 [nioEventLoopGroup-2-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 201 bytes from /127.0.0.1:9009
+2026-06-21 10:10:06.829 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 5: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.830 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 15: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.830 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 20: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.830 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 21: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.830 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 27: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.830 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 28: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.830 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 30: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.830 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 31: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.830 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 34: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.830 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 36: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.831 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 59: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.831 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 60: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.831 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 66: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.831 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 67: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.831 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 73: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.831 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 78: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.831 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 88: unspecified in parsing guide for type 430
+2026-06-21 10:10:06.831 [nioEventLoopGroup-2-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (201 bytes) using ASCII factory: ISO8583 MessageFactory cannot parse fields
+2026-06-21 10:10:06.833 [nioEventLoopGroup-2-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:9009: type=REVERSAL_ADVICE_RESPONSE stan=000624 passthrough=true
+2026-06-21 10:10:06.836 [nioEventLoopGroup-2-1] INFO  c.p.i.handler.IssuerResponseHandler - Received response from issuer /127.0.0.1:9009:
+Sim:                   MessageType: 0430
+Sim:                   Bitmap: 723C4641AEC0A000 [2,3,4,7,11,12,13,14,18,22,23,26,32,33,35,37,38,39,41,42,49,51]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 010000
+Sim:                   F04_AmountTransaction: 000000005000
+Sim:                   F07_TransmissionDateTime: 0621101005
+Sim:                   F11_SystemTraceAuditNumber: 000624
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F33_Field33: 27610000003
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 095445000000
+Sim:                   F38_ApprovalCode: 186870
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+2026-06-21 10:10:06.838 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=2a128417-0c85-4e4d-8b3e-681a2ccf33a2, type=REVERSAL_ADVICE_RESPONSE, direction=OUTBOUND, pan=987650******6084, amount=5000, currency=566, rrn=095445000000} (201 bytes)
+2026-06-21 10:10:06.839 [nioEventLoopGroup-2-1] INFO  c.p.a.handler.AcquirerMessageHandler - Sent to acquirer /127.0.0.1:50350:
+Sim:                   MessageType: 0430
+Sim:                   Bitmap: 723C4641AEC0A000 [2,3,4,7,11,12,13,14,18,22,23,26,32,33,35,37,38,39,41,42,49,51]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 010000
+Sim:                   F04_AmountTransaction: 000000005000
+Sim:                   F07_TransmissionDateTime: 0621101005
+Sim:                   F11_SystemTraceAuditNumber: 000624
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F33_Field33: 27610000003
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 095445000000
+Sim:                   F38_ApprovalCode: 186870
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+2026-06-21 10:10:06.839 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Correlated issuer response for STAN 000624
+2026-06-21 10:10:18.730 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 63 bytes from /127.0.0.1:50350
+2026-06-21 10:10:18.730 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 39: unspecified in parsing guide for type 800
+2026-06-21 10:10:18.731 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (63 bytes) using ASCII factory: ISO8583 MessageFactory cannot parse fields
+2026-06-21 10:10:18.732 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:50350: type=NETWORK_MANAGEMENT_REQUEST stan=000625 passthrough=true
+2026-06-21 10:10:18.733 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Received from acquirer /127.0.0.1:50350: type=NETWORK_MANAGEMENT_REQUEST stan=000625 pan=****
+2026-06-21 10:10:18.733 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageAssembler - Assembled 62 bytes for SwitchMessage{id=c0c467ce-90a6-467b-aa95-00c7b4140cab, type=NETWORK_MANAGEMENT_RESPONSE, direction=OUTBOUND, pan=****, amount=0, currency=null, rrn=null}
+2026-06-21 10:10:18.734 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=c0c467ce-90a6-467b-aa95-00c7b4140cab, type=NETWORK_MANAGEMENT_RESPONSE, direction=OUTBOUND, pan=****, amount=0, currency=null, rrn=null} (62 bytes)
+2026-06-21 10:10:18.736 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Sent to acquirer /127.0.0.1:50350:
+Sim:                   MessageType: 0810
+Sim:                   Bitmap: 2238000002800000 [3,7,11,12,13,39,41]
+Sim:                   F03_ProcessingCode: 000000
+Sim:                   F07_TransmissionDateTime: 0621101018
+Sim:                   F11_SystemTraceAuditNumber: 000625
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+2026-06-21 10:10:33.208 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 63 bytes from /127.0.0.1:50350
+2026-06-21 10:10:33.208 [nioEventLoopGroup-4-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 39: unspecified in parsing guide for type 800
+2026-06-21 10:10:33.209 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (63 bytes) using ASCII factory: ISO8583 MessageFactory cannot parse fields
+2026-06-21 10:10:33.210 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:50350: type=NETWORK_MANAGEMENT_REQUEST stan=000626 passthrough=true
+2026-06-21 10:10:33.211 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Received from acquirer /127.0.0.1:50350: type=NETWORK_MANAGEMENT_REQUEST stan=000626 pan=****
+2026-06-21 10:10:33.212 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageAssembler - Assembled 62 bytes for SwitchMessage{id=4609b8aa-627c-4554-9a01-333751c7702f, type=NETWORK_MANAGEMENT_RESPONSE, direction=OUTBOUND, pan=****, amount=0, currency=null, rrn=null}
+2026-06-21 10:10:33.213 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=4609b8aa-627c-4554-9a01-333751c7702f, type=NETWORK_MANAGEMENT_RESPONSE, direction=OUTBOUND, pan=****, amount=0, currency=null, rrn=null} (62 bytes)
+2026-06-21 10:10:33.214 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Sent to acquirer /127.0.0.1:50350:
+Sim:                   MessageType: 0810
+Sim:                   Bitmap: 2238000002800000 [3,7,11,12,13,39,41]
+Sim:                   F03_ProcessingCode: 000000
+Sim:                   F07_TransmissionDateTime: 0621101033
+Sim:                   F11_SystemTraceAuditNumber: 000626
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+2026-06-21 10:10:49.368 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 260 bytes from /127.0.0.1:50350
+2026-06-21 10:10:49.369 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (260 bytes) using ASCII factory: Insufficient data for LLLVAR field 63, pos 165 len 494
+2026-06-21 10:10:49.371 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:50350: type=AUTHORIZATION_REQUEST stan=000627 passthrough=true
+2026-06-21 10:10:49.371 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Received from acquirer /127.0.0.1:50350: type=AUTHORIZATION_REQUEST stan=000627 pan=987650******6084
+2026-06-21 10:10:49.371 [nioEventLoopGroup-4-1] DEBUG c.p.routing.impl.BinRoutingService - Routing message d7844f1f-95f9-4faf-b3e4-2654d3b24932 using BIN 987650
+2026-06-21 10:10:49.372 [nioEventLoopGroup-4-1] INFO  c.p.routing.impl.BinRoutingService - Routed message d7844f1f-95f9-4faf-b3e4-2654d3b24932 BIN=987650 -> issuer=9009
+2026-06-21 10:10:49.372 [nioEventLoopGroup-4-1] INFO  c.p.issuer.IssuerClientPool - Dispatching STAN 000627 to issuer 9009 via IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:10:49.374 [nioEventLoopGroup-4-1] INFO  c.p.issuer.IssuerConnection - Sending to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}:
+Sim:                   MessageType: 0100
+Sim:                   Bitmap: 723C46D1A8E0B000 [2,3,4,7,11,12,13,14,18,22,23,25,26,28,32,33,35,37,41,42,43,49,51,52]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 000000
+Sim:                   F04_AmountTransaction: 000000001000
+Sim:                   F07_TransmissionDateTime: 0621101049
+Sim:                   F11_SystemTraceAuditNumber: 000627
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F25_Field25: 00
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F28_Field28: 000000000
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F33_Field33: 27610000003
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 104945100000
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F43_Field43: contact@neaPay.com\Almere-Amsterdam\Neth
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+Sim:                   F52_Field52: [B@1243659f
+2026-06-21 10:10:49.374 [nioEventLoopGroup-2-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=d7844f1f-95f9-4faf-b3e4-2654d3b24932, type=AUTHORIZATION_REQUEST, direction=INBOUND, pan=987650******6084, amount=1000, currency=566, rrn=104945100000} (260 bytes)
+2026-06-21 10:10:49.375 [nioEventLoopGroup-2-1] DEBUG c.p.issuer.IssuerConnection - Queued STAN 000627 for issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:10:49.834 [nioEventLoopGroup-2-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 201 bytes from /127.0.0.1:9009
+2026-06-21 10:10:49.834 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 5: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.835 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 15: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.835 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 20: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.835 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 21: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.835 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 27: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.835 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 28: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.835 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 30: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.835 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 31: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.835 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 34: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.835 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 36: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.836 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 59: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.836 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 60: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.836 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 66: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.836 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 67: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.836 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 73: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.836 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 78: unspecified in parsing guide for type 110
+2026-06-21 10:10:49.836 [nioEventLoopGroup-2-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (201 bytes) using ASCII factory: ISO8583 MessageFactory cannot parse fields
+2026-06-21 10:10:49.838 [nioEventLoopGroup-2-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:9009: type=AUTHORIZATION_RESPONSE stan=000627 passthrough=true
+2026-06-21 10:10:49.840 [nioEventLoopGroup-2-1] INFO  c.p.i.handler.IssuerResponseHandler - Received response from issuer /127.0.0.1:9009:
+Sim:                   MessageType: 0110
+Sim:                   Bitmap: 723C4641AEC0A000 [2,3,4,7,11,12,13,14,18,22,23,26,32,33,35,37,38,39,41,42,49,51]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 000000
+Sim:                   F04_AmountTransaction: 000000001000
+Sim:                   F07_TransmissionDateTime: 0621101049
+Sim:                   F11_SystemTraceAuditNumber: 000627
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F33_Field33: 27610000003
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 104945100000
+Sim:                   F38_ApprovalCode: 335672
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+2026-06-21 10:10:49.840 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=957657f5-a1ce-4c39-a5b9-297d94838575, type=AUTHORIZATION_RESPONSE, direction=OUTBOUND, pan=987650******6084, amount=1000, currency=566, rrn=104945100000} (201 bytes)
+2026-06-21 10:10:49.841 [nioEventLoopGroup-2-1] INFO  c.p.a.handler.AcquirerMessageHandler - Sent to acquirer /127.0.0.1:50350:
+Sim:                   MessageType: 0110
+Sim:                   Bitmap: 723C4641AEC0A000 [2,3,4,7,11,12,13,14,18,22,23,26,32,33,35,37,38,39,41,42,49,51]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 000000
+Sim:                   F04_AmountTransaction: 000000001000
+Sim:                   F07_TransmissionDateTime: 0621101049
+Sim:                   F11_SystemTraceAuditNumber: 000627
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F33_Field33: 27610000003
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 104945100000
+Sim:                   F38_ApprovalCode: 335672
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+2026-06-21 10:10:49.842 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Correlated issuer response for STAN 000627
+2026-06-21 10:11:05.825 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 260 bytes from /127.0.0.1:50350
+2026-06-21 10:11:05.830 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.IsoMessageParser - Using binary bitmap parse over ASCII parse (stan=000628, panPresent=true)
+2026-06-21 10:11:05.830 [nioEventLoopGroup-4-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:50350: type=AUTHORIZATION_REQUEST stan=000628 passthrough=true
+2026-06-21 10:11:05.831 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Received from acquirer /127.0.0.1:50350: type=AUTHORIZATION_REQUEST stan=000628 pan=987650******6084
+2026-06-21 10:11:05.831 [nioEventLoopGroup-4-1] DEBUG c.p.routing.impl.BinRoutingService - Routing message 2851e9cb-1ba2-40d5-a7ae-b1bc1dc380c1 using BIN 987650
+2026-06-21 10:11:05.831 [nioEventLoopGroup-4-1] INFO  c.p.routing.impl.BinRoutingService - Routed message 2851e9cb-1ba2-40d5-a7ae-b1bc1dc380c1 BIN=987650 -> issuer=9009
+2026-06-21 10:11:05.831 [nioEventLoopGroup-4-1] INFO  c.p.issuer.IssuerClientPool - Dispatching STAN 000628 to issuer 9009 via IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:11:05.832 [nioEventLoopGroup-4-1] INFO  c.p.issuer.IssuerConnection - Sending to issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}:
+Sim:                   MessageType: 0100
+Sim:                   Bitmap: 723C46D1A8E0B000 [2,3,4,7,11,12,13,14,18,22,23,25,26,28,32,33,35,37,41,42,43,49,51,52]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 000000
+Sim:                   F04_AmountTransaction: 000000001000
+Sim:                   F07_TransmissionDateTime: 0621101105
+Sim:                   F11_SystemTraceAuditNumber: 000628
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F25_Field25: 00
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F28_Field28: 000000000
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F33_Field33: 27610000003
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 110545200000
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F43_Field43: contact@neaPay.com\Almere-Amsterdam\Neth
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+Sim:                   F52_Field52: [B@46f587ce
+2026-06-21 10:11:05.833 [nioEventLoopGroup-2-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=2851e9cb-1ba2-40d5-a7ae-b1bc1dc380c1, type=AUTHORIZATION_REQUEST, direction=INBOUND, pan=987650******6084, amount=1000, currency=566, rrn=110545200000} (260 bytes)
+2026-06-21 10:11:05.833 [nioEventLoopGroup-2-1] DEBUG c.p.issuer.IssuerConnection - Queued STAN 000628 for issuer IssuerEndpoint{9009 @ 127.0.0.1:9009}
+2026-06-21 10:11:06.476 [nioEventLoopGroup-2-1] INFO  c.p.iso8583.codec.IsoFrameDecoder - ISO frame received: 201 bytes from /127.0.0.1:9009
+2026-06-21 10:11:06.476 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 5: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.477 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 15: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.477 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 20: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.477 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 21: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.477 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 27: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.477 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 28: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.477 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 30: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.477 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 31: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.477 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 34: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.478 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 36: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.478 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 59: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.478 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 60: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.478 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 66: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.478 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 67: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.478 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 73: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.478 [nioEventLoopGroup-2-1] WARN  com.solab.iso8583.MessageFactory - ISO8583 MessageFactory cannot parse field 78: unspecified in parsing guide for type 110
+2026-06-21 10:11:06.478 [nioEventLoopGroup-2-1] DEBUG c.p.iso8583.IsoMessageParser - Metadata parse incomplete (201 bytes) using ASCII factory: ISO8583 MessageFactory cannot parse fields
+2026-06-21 10:11:06.480 [nioEventLoopGroup-2-1] INFO  c.p.iso8583.codec.IsoMessageDecoder - Decoded ISO message from /127.0.0.1:9009: type=AUTHORIZATION_RESPONSE stan=000628 passthrough=true
+2026-06-21 10:11:06.481 [nioEventLoopGroup-2-1] INFO  c.p.i.handler.IssuerResponseHandler - Received response from issuer /127.0.0.1:9009:
+Sim:                   MessageType: 0110
+Sim:                   Bitmap: 723C4641AEC0A000 [2,3,4,7,11,12,13,14,18,22,23,26,32,33,35,37,38,39,41,42,49,51]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 000000
+Sim:                   F04_AmountTransaction: 000000001000
+Sim:                   F07_TransmissionDateTime: 0621101105
+Sim:                   F11_SystemTraceAuditNumber: 000628
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F33_Field33: 27610000003
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 110545200000
+Sim:                   F38_ApprovalCode: 598752
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+2026-06-21 10:11:06.491 [nioEventLoopGroup-4-1] DEBUG c.p.iso8583.codec.IsoMessageEncoder - Encoded message: SwitchMessage{id=7a0041ab-2395-4213-baa4-dc10e0dccdb9, type=AUTHORIZATION_RESPONSE, direction=OUTBOUND, pan=987650******6084, amount=1000, currency=566, rrn=110545200000} (201 bytes)
+2026-06-21 10:11:06.492 [nioEventLoopGroup-2-1] INFO  c.p.a.handler.AcquirerMessageHandler - Sent to acquirer /127.0.0.1:50350:
+Sim:                   MessageType: 0110
+Sim:                   Bitmap: 723C4641AEC0A000 [2,3,4,7,11,12,13,14,18,22,23,26,32,33,35,37,38,39,41,42,49,51]
+Sim:                   F02_PAN: 9876500000306084
+Sim:                   F03_ProcessingCode: 000000
+Sim:                   F04_AmountTransaction: 000000001000
+Sim:                   F07_TransmissionDateTime: 0621101105
+Sim:                   F11_SystemTraceAuditNumber: 000628
+Sim:                   F12_DateTimeLocalTransaction: 020621
+Sim:                   F13_DateLocalTxn: 0621
+Sim:                   F14_DateExpiration: 3012
+Sim:                   F18_MerchantType: 5961
+Sim:                   F22_POSDataCode: 020
+Sim:                   F23_CardSequenceNumber: 000
+Sim:                   F26_CardAcceptorBusinessCode: 53
+Sim:                   F32_AcquiringInstitutionIdenti: 27610000001
+Sim:                   F33_Field33: 27610000003
+Sim:                   F35_Track2Data: 9876500000306084=30121011123123000
+Sim:                   F37_RetrievalReferenceNumber: 110545200000
+Sim:                   F38_ApprovalCode: 598752
+Sim:                   F39_ActionCode: 00
+Sim:                   F41_CardAcceptorTerminalIdenti: 20390059
+Sim:                   F42_CardAcceptorIdentification: 111120000012000
+Sim:                   F49_CurrencyCodeTransaction: 566
+Sim:                   F51_CurrencyCodeCardholderBill: 566
+2026-06-21 10:11:06.492 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Correlated issuer response for STAN 000628
+2026-06-21 10:16:05.841 [nioEventLoopGroup-4-1] WARN  c.p.a.handler.AcquirerMessageHandler - Reader idle on /127.0.0.1:50350, closing
+2026-06-21 10:16:05.842 [nioEventLoopGroup-4-1] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:50350
+2026-06-21 10:16:06.494 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-21 10:16:45.842 [nioEventLoopGroup-4-2] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:50504
+2026-06-21 10:21:06.494 [nioEventLoopGroup-2-1] DEBUG c.p.i.handler.IssuerResponseHandler - Issuer reader idle on /127.0.0.1:9009 (keepalive, not closing)
+2026-06-21 10:21:45.865 [nioEventLoopGroup-4-2] WARN  c.p.a.handler.AcquirerMessageHandler - Reader idle on /127.0.0.1:50504, closing
+2026-06-21 10:21:45.903 [nioEventLoopGroup-4-2] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer disconnected: /127.0.0.1:50504
+2026-06-21 10:21:48.425 [nioEventLoopGroup-4-3] INFO  c.p.a.handler.AcquirerMessageHandler - Acquirer connected: /127.0.0.1:50564

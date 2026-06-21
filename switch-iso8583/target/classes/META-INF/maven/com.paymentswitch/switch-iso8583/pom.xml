@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.paymentswitch</groupId>
+        <artifactId>payment-switch-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>switch-iso8583</artifactId>
+    <name>Payment Switch :: ISO 8583</name>
+    <description>ISO 8583 message parsing, assembly, and Netty codecs</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.paymentswitch</groupId>
+            <artifactId>switch-common</artifactId>
+        </dependency>
+       <dependency>
+        <groupId>net.sf.j8583</groupId>   <!-- was com.solab -->
+        <artifactId>j8583</artifactId>
+      </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-buffer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec</artifactId>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="switch-bootstrap" />
+        <module name="switch-issuer-client" />
+        <module name="switch-iso8583" />
+        <module name="switch-acquirer-server" />
+        <module name="switch-persistence" />
+        <module name="switch-common" />
+        <module name="switch-routing" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/switch-acquirer-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/switch-acquirer-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/switch-bootstrap/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/switch-bootstrap/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/switch-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/switch-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/switch-iso8583/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/switch-iso8583/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/switch-issuer-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/switch-issuer-client/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/switch-persistence/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/switch-persistence/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/switch-routing/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/switch-routing/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
